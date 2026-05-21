@@ -7,6 +7,7 @@ This repository contains configuration files for:
 - Kitty
 - Neovim
 - Fish shell
+- Real Programmers Dvorak (ThePrimeagen)
 
 The setup uses symbolic links managed by GNU Stow to keep configs organized, portable, and version controlled.
 
@@ -21,7 +22,9 @@ The setup uses symbolic links managed by GNU Stow to keep configs organized, por
 ├── nvim/
 │   └── .config/nvim/
 └── fish/
-    └── .config/fish/
+|   └── .config/fish/
+└── dvorak/
+    └── real-prog-dvorak
 ```
 
 Each top-level directory is a Stow package.
