@@ -40,7 +40,6 @@ sudo npm install -g tree-sitter-cli
 * **`<Leader> nh`**: Clear search highlights.
 * **`-`** (Minus): Open **Oil.nvim**. Edit folders like text.
 * **`Ctrl + h/j/k/l`**: Move focus between split windows.
-* **`jk`**: Instant Escape to Normal Mode.
 
 ### **2. Editing & Motion**
 

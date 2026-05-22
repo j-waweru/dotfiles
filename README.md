@@ -23,8 +23,11 @@ The setup uses symbolic links managed by GNU Stow to keep configs organized, por
 │   └── .config/nvim/
 └── fish/
 |   └── .config/fish/
-└── dvorak/
-    └── real-prog-dvorak
+└── xkb/
+    ├── README.md  
+    └── .config/
+        └── xkb/
+
 ```
 
 Each top-level directory is a Stow package.
