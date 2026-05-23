@@ -1,34 +1,25 @@
 ---
 
-# Neovim 0.12 "God Mode" Setup & Reference
+# Neovim 0.12 Setup & Reference
 
 Guide covers setup for professional modular environment. Works on **CachyOS** and **Ubuntu**.
 
-## Step 1: Install System Dependencies
+## Step 1: Install Neovim and System Dependencies
 
-OS needs tools for compilers, LSPs, and Treesitter automation.
+The script to download is found in
+dotfiles/aptinstall.sh 
+or 
+dotfiles/pacman.sh
 
-### **On Ubuntu / Debian (Apt)**
+---
+## Features and Plugins
 
-```bash
-sudo apt update && sudo apt install -y build-essential git unzip gcc g++ make python3-pip npm nodejs ripgrep fd-find xclip clangd pyright marksman pkg-config libssl-dev
-# CRITICAL: Install Treesitter CLI for auto-install parsers
-sudo npm install -g tree-sitter-cli
+telescope,neotree,oil.nvim,undotree,nvim ufo, indent-blankline,flash.nvim , mason and masontool installer, conform, fugitive, treesitter ,render-markdown and markdown-preview ,harpoon , ayu dark, lualine ,noice , transparent.nvim ,nvim cmp ,luasnip,friendlysnippets,cmp_luasnip, ,autopairs autotags sorround comment.nvim and nvim sorround, trouble.nvim ,
 
-```
-
-### **On CachyOS (Pacman)**
-
-```bash
-sudo pacman -S base-devel git unzip gcc python-pip npm nodejs ripgrep fd xclip clang pyright marksman
-# CRITICAL: Install Treesitter CLI
-sudo npm install -g tree-sitter-cli
-
-```
 
 ---
 
-## Step 2: Keymap Reference Sheet
+## Keymap Reference Sheet
 
 ### **1. Navigation & UI**
 

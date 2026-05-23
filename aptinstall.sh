@@ -39,7 +39,7 @@ elif [ "$PM" = "apt" ]; then
         kitty fish \
         build-essential cmake unzip ninja-build gettext curl git \
         nodejs npm pipx cargo \
-        wl-clipboard xclip ripgrep findutils fzf stow
+        wl-clipboard xclip ripgrep findutils fzf stow xkb-data x11-xkb-utils libxkbcommon-tools btop keyd 
 
     # Ensure pipx execution path binaries register correctly
     pipx ensurepath
@@ -114,3 +114,5 @@ else
 fi
 
 echo "[!] SUCCESS: Configuration complete. Restart session to cycle terminal shell environments."
+
+
