@@ -1,0 +1,27 @@
+add_newline = true
+
+format = """
+[╭─](bold green)$username$hostname$directory$git_branch$git_status$cmd_duration
+[╰─❯](bold green) """
+
+[directory]
+style = "bold cyan"
+truncate_to_repo = false
+
+[git_branch]
+symbol = " "
+
+[git_status]
+style = "bold yellow"
+
+[cmd_duration]
+min_time = 500
+format = "took [$duration](bold yellow)"
+
+[username]
+show_always = true
+style_user = "bold blue"
+
+[hostname]
+ssh_only = false
+style = "bold dimmed white"
