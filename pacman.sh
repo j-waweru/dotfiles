@@ -1,118 +1,125 @@
+Script rebuilt for Arch/CachyOS. Pacman native dependencies swapped. Neovim native extra repository package used instead of source build. Google Chrome installation handled via Paru AUR helper. Keyboard layout configuration targets Hyprland input blocks inside `~/.config/hypr/hyprland.conf`.
+
+```bash
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "==> Detecting Package Manager and Desktop Environment..."
-DE="${XDG_CURRENT_DESKTOP:-}"
-
-if [ -f /etc/debian_version ]; then
-    PM="apt"
-    echo "    System identified as Debian-based (Kali/REMnux)."
-elif [ -f /etc/arch-release ] || grep -q "cachyos" /etc/os-release 2>/dev/null; then
-    PM="pacman"
-    echo "    System identified as Arch-based (CachyOS)."
-else
-    echo "[-] Unsupported Linux distribution. Exiting." >&2
+echo "==> Detecting OS Environment..."
+if [ ! -f /etc/arch-release ] && ! grep -q "cachyos" /etc/os-release 2>/dev/null; then
+    echo "[-] Unsupported Linux distribution. Arch/CachyOS required. Exiting." >&2
     exit 1
 fi
 
 # ==========================================
 # 1. INSTALL CORE PACKAGES AND DEPENDENCIES
 # ==========================================
-echo "==> Installing base software, runtimes, and compiler toolchains..."
+echo "==> Installing base software, runtimes, and tools via Pacman..."
 
-if [ "$PM" = "pacman" ]; then
-    # CachyOS handles Neovim 0.12 native tracking cleanly inside extra repos
-    sudo pacman -Syu --needed --noconfirm \
-        kitty fish neovim \
-        base-devel cmake unzip ninja curl git \
-        nodejs npm python-pipx rustup \
-        wl-clipboard xclip ripgrep fd fzf stow
+# System update and package deployment
+sudo /usr/bin/pacman -Syu --needed --noconfirm \
+    kitty fish neovim \
+    base-devel cmake unzip ninja curl git \
+    nodejs npm python-pipx \
+    wl-clipboard xclip ripgrep findutils fzf stow \
+    btop bat plocate rofi ulauncher \
+    unrar p7zip \
+    trash-cli okular jetbrains-mono-font \
+    vlc wget
 
-    # Initialize Rust stable build chain toolset
-    if ! command -v cargo &> /dev/null; then
-        rustup default stable
-    fi
+# Ensure pipx execution path binaries register correctly
+/usr/bin/pipx ensurepath
 
-elif [ "$PM" = "apt" ]; then
-    sudo apt-get update -y
-    sudo apt-get install -y \
-        kitty fish \
-        build-essential cmake unzip ninja-build gettext curl git \
-        nodejs npm pipx cargo \
-        wl-clipboard xclip ripgrep findutils fzf stow xkb-data x11-xkb-utils libxkbcommon-tools btop keyd 
+# ==========================================
+# 2. EXTRA RUNTIMES AND LANGUAGE SERVERS
+# ==========================================
+echo "==> Installing Rust, Cargo tools, Python packages, and NPM globals..."
 
-    # Ensure pipx execution path binaries register correctly
-    pipx ensurepath
-
-    # ==========================================
-    # 2. BUILD NEOVIM 0.12 FROM SOURCE (APT COMPAT)
-    # ==========================================
-    echo "==> Building Neovim 0.12 from source release tag..."
-    SRC_DIR=$(mktemp -d)
-    git clone --depth 1 --branch v0.12.1 https://github.com/neovim/neovim.git "$SRC_DIR"
-    
-    cd "$SRC_DIR"
-    make CMAKE_BUILD_TYPE=Release
-    sudo make install
-    
-    cd -
-    rm -rf "$SRC_DIR"
+# Install Rust via rustup wrapper natively tracked or direct script
+if ! command -v rustup &> /dev/null; then
+    sudo /usr/bin/pacman -S --needed --noconfirm rustup
+    /usr/bin/rustup default stable
 fi
 
-echo "[+] Core software packages and dev runtimes successfully installed."
+# Install Language Servers and Tooling
+"$HOME/.cargo/bin/cargo" install marksman asm-lsp
+/usr/bin/pipx install yt-dlp black
+sudo /usr/bin/npm install -g tree-sitter-cli pyright
 
 # ==========================================
-# 3. INTERACTIVE SHELL ENVIRONMENT MIGRATION
+# 3. AUR PACKAGES VIA PARU (CHROME & XDM)
 # ==========================================
-if [ "${SHELL}" != "$(which fish)" ]; then
+echo "==> Deploying AUR packages via Paru..."
+
+# Download and Install XDM (.NET version) and Google Chrome via AUR
+/usr/bin/paru -S --needed --noconfirm xdm-bin google-chrome
+
+# ==========================================
+# 4. THEME CONFIGURATION
+# ==========================================
+echo "==> Downloading Tokyo Night Kitty theme..."
+/usr/bin/mkdir -p "$HOME/.config/kitty/themes"
+/usr/bin/curl -L https://raw.githubusercontent.com/davidmathers/tokyo-night-kitty-theme/master/tokyo-night-kitty.conf \
+    -o "$HOME/.config/kitty/themes/tokyo-night.conf"
+
+# ==========================================
+# 5. INTERACTIVE SHELL ENVIRONMENT MIGRATION
+# ==========================================
+FISH_PATH="/usr/bin/fish"
+if [ "${SHELL}" != "$FISH_PATH" ]; then
     echo "==> Changing default shell environment to Fish..."
-    chsh -s "$(which fish)"
+    sudo /usr/bin/chsh -s "$FISH_PATH" "$USER"
+fi
+
+# Configure Fish path for future sessions
+/usr/bin/mkdir -p "$HOME/.config/fish"
+if [ ! -f "$HOME/.config/fish/config.fish" ] || ! grep -q "fish_add_path \$HOME/.cargo/bin" "$HOME/.config/fish/config.fish"; then
+    echo "fish_add_path \$HOME/.cargo/bin" >> "$HOME/.config/fish/config.fish"
 fi
 
 # ==========================================
-# 4. ENVIRONMENT INPUT & KEYBOARD CONFIGURATION
+# 6. HYPRLAND KEYBOARD CONFIGURATION
 # ==========================================
-echo "==> Configuring input sources and key overrides..."
+echo "==> Injecting keyboard layout configurations into Hyprland config..."
 
-if [ "$PM" = "pacman" ] || [[ "$DE" == *"KDE"* ]]; then
-    echo "    Applying configurations for KDE Plasma Engine..."
-    
-    # Ensure config path directory exists
-    mkdir -p ~/.config
+HYPR_CONF="$HOME/.config/hypr/hyprland.conf"
+/usr/bin/mkdir -p "$HOME/.config/hypr"
 
-    # Configure multiple layouts (US and Real Programmer's Dvorak) inside Plasma configuration
-    kwriteconfig6 --file ~/.config/kxkbrc --group "Layout" --key "LayoutList" "us,real-prog-dvorak"
-    kwriteconfig6 --file ~/.config/kxkbrc --group "Layout" --key "Use" "true"
-    
-    # Inject Caps Lock / Escape swap rule option into Plasma layout sub-keys
-    kwriteconfig6 --file ~/.config/kxkbrc --group "Layout" --key "Options" "caps:swapescape"
-
-    # Reload the configuration engine immediately across current active XKB sessions
-    qdbus6 org.kde.keyboard /Layouts reconfigure || true
-else
-    echo "    Applying configurations for GNOME/XFCE (Debian/Kali/REMnux)..."
-    # GNOME environment mapping
-    gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('xkb', 'real-prog-dvorak')]"
-    gsettings set org.gnome.desktop.input-sources xkb-options "['caps:swapescape']"
+# Ensure clean input block setup without duplicates
+if [ -f "$HYPR_CONF" ]; then
+    # Backup existing config
+    /usr/bin/cp "$HYPR_CONF" "${HYPR_CONF}.bak"
 fi
 
+# Append or create Hyprland layout rules directly
+cat << 'EOF' >> "$HYPR_CONF"
+
+# Input configuration injected by setup script
+input {
+    kb_layout = us,real-prog-dvorak
+    kb_variant = 
+    kb_model =
+    kb_options = caps:swapescape
+    kb_rules =
+
+    follow_mouse = 1
+}
+EOF
+
 # ==========================================
-# 5. AUTOMATIC DOTFILES SYMLINK STOWING
+# 7. AUTOMATIC DOTFILES SYMLINK STOWING
 # ==========================================
 echo "==> Preparing system profile paths for GNU Stow orchestration..."
 
-# Purge any existing folder target collisions before linking
-rm -rf ~/.config/xkb
+/usr/bin/rm -rf "$HOME/.config/xkb"
 
-# Run Stow deployment targeting current execution context folder
 if [ -d "$HOME/dotfiles" ]; then
     cd "$HOME/dotfiles"
-    stow xkb
+    /usr/bin/stow xkb
     echo "[+] Symlinks successfully generated for xkb module."
 else
     echo "[-] WARNING: ~/dotfiles directory not detected. Skipping automatic Stow execution step." >&2
 fi
 
-echo "[!] SUCCESS: Configuration complete. Restart session to cycle terminal shell environments."
+echo "[!] SUCCESS: Configuration complete. Restart Hyprland session to apply all environment rules."
 
-
+```
