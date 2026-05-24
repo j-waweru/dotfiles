@@ -6,7 +6,7 @@ This repository contains configuration files for:
 
 - Kitty
 - Neovim
-- Fish shell
+- Fish shell and starship
 - Real Programmers Dvorak (ThePrimeagen)
 
 The setup uses symbolic links managed by GNU Stow to keep configs organized, portable, and version controlled.
@@ -23,6 +23,8 @@ The setup uses symbolic links managed by GNU Stow to keep configs organized, por
 │   └── .config/nvim/
 └── fish/
 |   └── .config/fish/
+└── starship/
+|   └── .config/starship.toml/
 └── xkb/
     ├── README.md  
     └── .config/
