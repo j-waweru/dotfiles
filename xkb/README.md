@@ -1,7 +1,7 @@
 
-# ⌨️ Real Programmer's Dvorak — End-to-End Installation Guide
+# ⌨️ Unreal Programmer's Dvorak — Installation Guide
 
-Complete setup instructions to deploy The Primeagen's Real Programmer's Dvorak on a brand new machine.
+Complete setup instructions to deploy my custom layout mostly *The Primeagen's Real Programmer's Dvorak* with some personal tweaks.
 
 ![rpd](./RPD.png)
 
@@ -53,14 +53,14 @@ ln -sf ~/dotfiles/xkb/.config/xkb/rules ~/.config/xkb/rules
 
 1. Open **System Settings** -> **Input Devices** -> **Keyboard**.
 2. Click the **Add...** layout action button.
-3. Type and select `English (Real Programmers Dvorak)`.
+3. Type and select `English (Unreal Programmers Dvorak)`.
 4. Move this layout entry to the top position block and hit **Apply**.
 
 #### 🐉 For Kali / REMnux (XFCE)
 
 1. Open **Settings** -> **Keyboard** -> **Layout** tab selection.
 2. Toggle off the **Use system defaults** selector checkbox.
-3. Click **Add**, find and select `English (Real Programmers Dvorak)`.
+3. Click **Add**, find and select `English (Unreal Programmers Dvorak)`.
 
 #### 🎯 For Ubuntu / GNOME Environments
 
@@ -69,13 +69,16 @@ Force the background window system environment to flush its active source layout
 ```bash
 gsettings reset org.gnome.desktop.input-sources sources
 gsettings reset org.gnome.desktop.input-sources mru-sources
-gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('xkb', 'real-prog-dvorak')]"
+gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('xkb', 'unreal-prog-dvorak')]"
 
 ```
 
 ---
 
 ## 🪟 Windows Setup Steps
+
+> [!WARNING]
+> This is for the original RPD. I haven't ported my own custom tweaks to windows. Plans to change later.
 
 
 ### 1. Grab Your Dotfiles Tree

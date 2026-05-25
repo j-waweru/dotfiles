@@ -13,5 +13,16 @@
       </configItem>
       <variantList/>
     </layout>
+    <layout>
+      <configItem>
+        <name>unreal-prog-dvorak</name>
+        <shortDescription>urpd</shortDescription>
+        <description>English (Unreal Programmers Dvorak)</description>
+        <languageList>
+          <iso639Id>eng</iso639Id>
+        </languageList>
+      </configItem>
+      <variantList/>
+    </layout>
   </layoutList>
 </xkbConfigRegistry>
