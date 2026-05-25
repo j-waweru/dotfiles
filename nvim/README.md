@@ -48,7 +48,7 @@ telescope,neotree,oil.nvim,undotree,nvim ufo, indent-blankline,flash.nvim , maso
 * **`<Leader> ca`**: **Code Actions**. Quick-fixes.
 * **`<Leader> rn`**: **Smart Rename**. Project-wide.
 * **`Tab` / `S-Tab**`: Navigate autocomplete list.
-* **`<Leader> q`**: Open **Trouble** diagnostics list. [Focus] [true].
+* **`<Leader> d`**: Open **Trouble** diagnostics list. [Focus] [true].
 
 ### **4. Workflow & System**
 

@@ -1,6 +1,27 @@
 return {
+    -- =========================================
     -- NAVIGATION & FILES
-    { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
+    -- =========================================
+{
+    "nvim-telescope/telescope.nvim",
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+    },
+
+    config = function()
+        local telescope = require("telescope")
+        local builtin = require("telescope.builtin")
+
+        telescope.setup({})
+
+        -- SPELL SUGGESTIONS
+        vim.keymap.set("n", "<leader>z", function()
+            builtin.spell_suggest(require("telescope.themes").get_cursor({}))
+        end, { desc = "Spell Suggestions" })
+    end,
+},
+    
+  
     { "nvim-neo-tree/neo-tree.nvim", dependencies = { "nvim-lua/plenary.nvim" }, config = true },
     { "stevearc/oil.nvim", config = true },
     {
@@ -50,4 +71,5 @@ return {
         opts = { modes = { char = { enabled = false }, search = { enabled = false } } },
         keys = { { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end } },
     },
+
 }

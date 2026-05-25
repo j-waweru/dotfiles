@@ -1,6 +1,6 @@
 local key = vim.keymap.set
-vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "Git Status (Fugitive)" })
 vim.g.mapleader = " "
+vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "Git Status (Fugitive)" })
 
 -- UndoTree: Map to plugin command
 key("n", "<leader>u", vim.cmd.UndotreeToggle)
@@ -53,3 +53,5 @@ key("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 --key("i", "jk", "<Esc>", { desc = "Escape to Normal Mode" })
 key('t', '<Esc><Esc>', [[<C-\><C-n>]])
+
+

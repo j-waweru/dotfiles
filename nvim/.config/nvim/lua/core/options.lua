@@ -1,5 +1,9 @@
 local opt = vim.opt
 
+-- Enable spell checking
+opt.spell = true
+opt.spelllang = { 'en' }
+
 -- FOLDING SETTINGS (VSCode Style)
 opt.foldcolumn = '0'     -- Show only one column for indicators
 opt.foldlevel = 99       -- Ensure most folds are open by default
