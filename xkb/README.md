@@ -1,7 +1,7 @@
 
 # ⌨️ Unreal Programmer's Dvorak — Installation Guide
 
-Complete setup instructions to deploy my custom layout mostly *The Primeagen's Real Programmer's Dvorak* with some personal tweaks.
+Complete setup instructions to deploy my custom dvorak layout .
 
 ![unreal programmers dvorak](./URPD.png)
 
@@ -38,15 +38,6 @@ stow xkb
 
 ```
 
-*(Alternative: If `stow` is not installed on the system, link paths manually using absolute targets)*
-
-```bash
-mkdir -p ~/.config/xkb
-ln -sf ~/dotfiles/xkb/.config/xkb/symbols ~/.config/xkb/symbols
-ln -sf ~/dotfiles/xkb/.config/xkb/rules ~/.config/xkb/rules
-
-```
-
 ### 4. Activate the Desktop Environment Engine
 
 #### 🦎 For CachyOS (KDE Plasma)
@@ -78,7 +69,7 @@ gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('xkb', '
 ## 🪟 Windows Setup Steps
 
 > [!WARNING]
-> This is for the original RPD. I haven't ported my own custom tweaks to windows. Plans to change later.
+> This is for the Primeagen's dvorak. I haven't ported my own custom tweaks to windows. Plans to change later.
 
 
 ### 1. Grab Your Dotfiles Tree
