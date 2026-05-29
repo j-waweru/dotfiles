@@ -37,7 +37,7 @@ xkb_symbols "unreal-prog-dvorak" {
     // Home Row
     key <AC01> { [           a,            A                    ] };
     key <AC02> { [           o,            O                    ] }; 
-    key <AC03> { [           e,            e                    ] }; 
+    key <AC03> { [           e,            E                    ] }; 
     key <AC04> { [           u,            U                    ] };
     key <AC05> { [           i,            I                    ] };
     key <AC06> { [           d,            D                    ] };
