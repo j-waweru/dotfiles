@@ -1,7 +1,8 @@
 
 # ⌨️ Unreal Programmer's Dvorak — Installation Guide
 
-Complete setup instructions to deploy my custom dvorak layout .
+Complete setup instructions to deploy my custom dvorak layout.
+Based on the primeagen's layout.
 
 ![unreal programmers dvorak](./URPD.png)
 
@@ -14,6 +15,7 @@ Modern Linux setups using `libxkbcommon` read custom layouts directly from your 
 Open a terminal and clone your dotfiles repository directly into your home folder:
 
 ```bash
+mkdir ~/dotfiles
 git clone https://github.com/j-waweru/dotfiles.git ~/dotfiles
 
 ```
@@ -47,6 +49,22 @@ stow xkb
 3. Type and select `English (Unreal Programmers Dvorak)`.
 4. Move this layout entry to the top position block and hit **Apply**.
 
+#### 🦎 For CachyOS (Hyprland)
+
+
+Open Hyprland configuration file with text editor:
+
+```bash
+nvim ~/.config/hypr/hyprland.conf
+
+input {
+    kb_layout = us
+    kb_variant = unreal-prog-dvorak
+    
+    # Keep standard toggle shortcut if needed
+    # kb_options = grp:win_space_toggle
+}
+```
 #### 🐉 For Kali / REMnux (XFCE)
 
 1. Open **Settings** -> **Keyboard** -> **Layout** tab selection.
