@@ -45,7 +45,7 @@ alias rm="rm -i"
     abbr gs 'git status'
     abbr gst 'git stash'
     abbr gsp 'git stash pop'
-    abbr gp 'git push'
+    abbr gp 'git push origin main'
     abbr gpl 'git pull'
     abbr gsw 'git switch'
     abbr gsm 'git switch main'
