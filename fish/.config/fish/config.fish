@@ -28,19 +28,32 @@ alias lt="eza --tree --level=2 --icons"
 # Better cat
 alias cat="batcat"
 
+# neovim alias
+alias nv="nvim"
+
 # Safer commands
 alias cp="cp -i"
 alias mv="mv -i"
 alias rm="rm -i"
 
 # Git shortcuts
-alias gs="git status"
-alias ga="git add"
-alias gc="git commit"
-alias gp="git push"
-alias gl="git pull"
-alias gd="git diff"
-alias gco="git checkout"
+    abbr lg 'lazygit'
+    abbr gd 'git diff'
+    abbr ga 'git add .'
+    abbr gc 'git commit -am'
+    abbr gl 'git log'
+    abbr gs 'git status'
+    abbr gst 'git stash'
+    abbr gsp 'git stash pop'
+    abbr gp 'git push'
+    abbr gpl 'git pull'
+    abbr gsw 'git switch'
+    abbr gsm 'git switch main'
+    abbr gb 'git branch'
+    abbr gbd 'git branch -d'
+    abbr gco 'git checkout'
+    abbr gsh 'git show'
+    abbr gcl 'git clone --depth=1'
 
 # Navigation
 alias ..="cd .."
