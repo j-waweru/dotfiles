@@ -29,7 +29,7 @@ alias lt="eza --tree --level=2 --icons"
 alias cat="batcat"
 
 # neovim alias
-alias nv="nvim"
+abbr nv 'nvim'
 
 # Safer commands
 alias cp="cp -i"
