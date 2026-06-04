@@ -29,7 +29,7 @@ return {
         config = function()
         require('lualine').setup({
             options = {
-                theme = 'ayu_dark',
+                theme = 'ayu',
                 component_separators = { left = '', right = ''},
                 section_separators = { left = '', right = ''},
                 globalstatus = true,
