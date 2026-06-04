@@ -46,5 +46,6 @@ au("ColorScheme", {
    hl(0, "LineNrBelow", { fg = "#a8a8a8" })
    hl(0, "CursorLineNr", { fg = "#ffcc66", bold = true })
    hl(0, "FoldColumn", { fg = "#ffcc66" })
+   hl(0, "Comment", { fg = "#8FA1B3" , italic = true })
    end,
 })
