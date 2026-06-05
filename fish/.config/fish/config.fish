@@ -28,6 +28,9 @@ alias lt="eza --tree --level=2 --icons"
 # Better cat
 alias cat="batcat"
 
+# alias cd="zoxide"
+
+
 # neovim alias
 abbr nv 'nvim'
 
@@ -54,6 +57,8 @@ alias rm="rm -i"
     abbr gco 'git checkout'
     abbr gsh 'git show'
     abbr gcl 'git clone --depth=1'
+
+abbr -a paru 'paru -S --needed'
 
 # Navigation
 alias ..="cd .."

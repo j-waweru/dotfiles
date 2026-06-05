@@ -1,5 +1,3 @@
-Script modified. Pacman check removed. Apt tools merged. Absolute paths enforced.
-
 ```bash
 #!/usr/bin/env bash
 set -euo pipefail

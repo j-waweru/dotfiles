@@ -16,7 +16,7 @@ fi
 echo "==> Installing base software, runtimes, and tools via Pacman..."
 
 # System update and package deployment
-sudo /usr/bin/pacman -Syu --needed --noconfirm \
+sudo pacman -Syu --needed --noconfirm \
     kitty fish neovim \
     base-devel cmake unzip ninja curl git \
     nodejs npm python-pipx \
@@ -27,7 +27,7 @@ sudo /usr/bin/pacman -Syu --needed --noconfirm \
     vlc wget
 
 # Ensure pipx execution path binaries register correctly
-/usr/bin/pipx ensurepath
+pipx ensurepath
 
 # ==========================================
 # 2. EXTRA RUNTIMES AND LANGUAGE SERVERS
@@ -36,14 +36,14 @@ echo "==> Installing Rust, Cargo tools, Python packages, and NPM globals..."
 
 # Install Rust via rustup wrapper natively tracked or direct script
 if ! command -v rustup &> /dev/null; then
-    sudo /usr/bin/pacman -S --needed --noconfirm rustup
+    sudo pacman -S --needed --noconfirm rustup
     /usr/bin/rustup default stable
 fi
 
 # Install Language Servers and Tooling
 "$HOME/.cargo/bin/cargo" install marksman asm-lsp
-/usr/bin/pipx install yt-dlp black
-sudo /usr/bin/npm install -g tree-sitter-cli pyright
+pipx install yt-dlp black yazi-bin
+sudo npm install -g tree-sitter-cli pyright
 
 # ==========================================
 # 3. AUR PACKAGES VIA PARU (CHROME & XDM)
@@ -51,14 +51,14 @@ sudo /usr/bin/npm install -g tree-sitter-cli pyright
 echo "==> Deploying AUR packages via Paru..."
 
 # Download and Install XDM (.NET version) and Google Chrome via AUR
-/usr/bin/paru -S --needed --noconfirm xdm-bin google-chrome
+paru -S --needed --noconfirm xdm-bin google-chrome
 
 # ==========================================
 # 4. THEME CONFIGURATION
 # ==========================================
 echo "==> Downloading Tokyo Night Kitty theme..."
-/usr/bin/mkdir -p "$HOME/.config/kitty/themes"
-/usr/bin/curl -L https://raw.githubusercontent.com/davidmathers/tokyo-night-kitty-theme/master/tokyo-night-kitty.conf \
+mkdir -p "$HOME/.config/kitty/themes"
+curl -L https://raw.githubusercontent.com/davidmathers/tokyo-night-kitty-theme/master/tokyo-night-kitty.conf \
     -o "$HOME/.config/kitty/themes/tokyo-night.conf"
 
 # ==========================================
@@ -67,11 +67,11 @@ echo "==> Downloading Tokyo Night Kitty theme..."
 FISH_PATH="/usr/bin/fish"
 if [ "${SHELL}" != "$FISH_PATH" ]; then
     echo "==> Changing default shell environment to Fish..."
-    sudo /usr/bin/chsh -s "$FISH_PATH" "$USER"
+    sudo chsh -s "$FISH_PATH" "$USER"
 fi
 
 # Configure Fish path for future sessions
-/usr/bin/mkdir -p "$HOME/.config/fish"
+mkdir -p "$HOME/.config/fish"
 if [ ! -f "$HOME/.config/fish/config.fish" ] || ! grep -q "fish_add_path \$HOME/.cargo/bin" "$HOME/.config/fish/config.fish"; then
     echo "fish_add_path \$HOME/.cargo/bin" >> "$HOME/.config/fish/config.fish"
 fi
@@ -82,12 +82,12 @@ fi
 echo "==> Injecting keyboard layout configurations into Hyprland config..."
 
 HYPR_CONF="$HOME/.config/hypr/hyprland.conf"
-/usr/bin/mkdir -p "$HOME/.config/hypr"
+mkdir -p "$HOME/.config/hypr"
 
 # Ensure clean input block setup without duplicates
 if [ -f "$HYPR_CONF" ]; then
     # Backup existing config
-    /usr/bin/cp "$HYPR_CONF" "${HYPR_CONF}.bak"
+   cp "$HYPR_CONF" "${HYPR_CONF}.bak"
 fi
 
 # Append or create Hyprland layout rules directly
@@ -95,7 +95,7 @@ cat << 'EOF' >> "$HYPR_CONF"
 
 # Input configuration injected by setup script
 input {
-    kb_layout = us,real-prog-dvorak
+    kb_layout = us,unreal-prog-dvorak
     kb_variant = 
     kb_model =
     kb_options = caps:swapescape
@@ -110,11 +110,11 @@ EOF
 # ==========================================
 echo "==> Preparing system profile paths for GNU Stow orchestration..."
 
-/usr/bin/rm -rf "$HOME/.config/xkb"
+rm -rf "$HOME/.config/xkb"
 
 if [ -d "$HOME/dotfiles" ]; then
     cd "$HOME/dotfiles"
-    /usr/bin/stow xkb
+    stow xkb
     echo "[+] Symlinks successfully generated for xkb module."
 else
     echo "[-] WARNING: ~/dotfiles directory not detected. Skipping automatic Stow execution step." >&2
