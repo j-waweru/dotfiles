@@ -28,7 +28,7 @@ alias lt="eza --tree --level=2 --icons"
 # Better cat
 alias cat="batcat"
 
-# alias cd="zoxide"
+alias cd="z"
 
 
 # neovim alias
@@ -94,3 +94,4 @@ set -U fish_history 10000
 
 # Prompt spacing
 set -g fish_prompt_pwd_dir_length 3
+
