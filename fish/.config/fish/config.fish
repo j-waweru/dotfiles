@@ -30,7 +30,6 @@ alias cat="batcat"
 
 alias cd="z"
 
-
 # neovim alias
 abbr nv 'nvim'
 
@@ -43,7 +42,7 @@ alias rm="rm -i"
     abbr lg 'lazygit'
     abbr gd 'git diff'
     abbr ga 'git add .'
-    abbr gc 'git commit -am'
+    abbr gc 'git commit -am "did stuff"'
     abbr gl 'git log'
     abbr gs 'git status'
     abbr gst 'git stash'
@@ -64,12 +63,6 @@ abbr -a paru 'paru -S --needed'
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
-
-# Fastfetch
-alias ff="fastfetch"
-
-# Use fd instead of find
-alias find="fdfind"
 
 # Zoxide
 zoxide init fish | source

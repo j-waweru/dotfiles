@@ -1,8 +1,19 @@
 add_newline = true
 
+# Left side prompt
 format = """
-[╭─](bold green)$username$hostname$directory$git_branch$git_status$cmd_duration
+[╭─](bold green)$username $directory
 [╰─❯](bold green) """
+
+# Right side prompt
+right_format = """$fill$git_branch$git_status$cmd_duration$python"""
+
+[fill]
+symbol = "."
+
+[python]
+format = '[(\($virtualenv\) )]($style)'
+style = "yellow bold"
 
 [directory]
 style = "bold cyan"
@@ -21,7 +32,7 @@ format = "took [$duration](bold yellow)"
 [username]
 show_always = true
 style_user = "bold blue"
+# Set to false or remove to hide hostname
 
 [hostname]
-ssh_only = false
-style = "bold dimmed white"
+disabled = true
