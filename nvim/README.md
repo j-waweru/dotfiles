@@ -1,70 +1,195 @@
----
-
 # Neovim 0.12 Setup & Reference
 
-Guide covers setup for professional modular environment. Works on **CachyOS** and **Ubuntu**.
+Custom keymaps + plugin purpose.
 
-## Step 1: Install Neovim and System Dependencies
-
-The script to download is found in
-dotfiles/aptinstall.sh 
-or 
-dotfiles/pacman.sh
-
----
-## Features and Plugins
-
-telescope,neotree,oil.nvim,undotree,nvim ufo, indent-blankline,flash.nvim , mason and masontool installer, conform, fugitive, treesitter ,render-markdown and markdown-preview ,harpoon , ayu dark, lualine ,noice , transparent.nvim ,nvim cmp ,luasnip,friendlysnippets,cmp_luasnip, ,autopairs autotags sorround comment.nvim and nvim sorround, trouble.nvim ,
-
+Leader key: `<Space>`
 
 ---
 
-## Keymap Reference Sheet
+## Telescope
+Plugin: `telescope.nvim`  
+Fuzzy finder for files, text search, LSP symbols.
 
-### **1. Navigation & UI**
+| Keymap | Action |
+|--------|--------|
+| `<leader>ff` | Find files |
+| `<leader>fg` | Live grep |
+| `<leader>ss` | LSP document symbols |
 
-* **`<Leader> e`**: Toggle **Neo-tree**. Focuses current file.
-* **`<Leader> ff`**: **Find Files**. Telescope search.
-* **`<Leader> fg`**: **Live Grep**. Project-wide text search.
-* **`<Leader> ss`**: **Symbol Search**. Jump to functions/structs.
-* **`<Leader> ;`**: Command mode shortcut.
-* **`<Leader> nh`**: Clear search highlights.
-* **`-`** (Minus): Open **Oil.nvim**. Edit folders like text.
-* **`Ctrl + h/j/k/l`**: Move focus between split windows.
+---
 
-### **2. Editing & Motion**
+## Comment
+Plugin: `Comment.nvim`  
+Fast line/block commenting.
 
-* **`s` (Flash)**: Type `s` + 2 chars to jump anywhere.
-* **`<Tab>`** (Inside brackets/quotes): **Tabout**. Jumps out instantly.
-* **`ysw[char]`**: **Surround** Word.
-* **`ds[char]`**: **Delete** Surround.
-* **`cs[old][new]`**: **Change** Surround.
-* **`gcc`**: Comment/Uncomment line.
+| Keymap | Action |
+|--------|--------|
+| `gcc` | Toggle line comment |
+| `gbc` | Toggle block comment |
+| `gc` (visual) | Toggle selection comment |
+| `gb` (visual) | Toggle block comment |
 
-### **3. Intellisense & LSP (0.12 Native)**
+---
 
-* **`K`**: **Hover**. Shows documentation/signatures.
-* **`gd`**: **Go to Definition**.
-* **`<Leader> ca`**: **Code Actions**. Quick-fixes.
-* **`<Leader> rn`**: **Smart Rename**. Project-wide.
-* **`Tab` / `S-Tab**`: Navigate autocomplete list.
-* **`<Leader> d`**: Open **Trouble** diagnostics list. [Focus] [true].
+## Surround
+Plugin: `nvim-surround`  
+Add/change/delete brackets, quotes, tags.
 
-### **4. Workflow & System**
+| Keymap | Action |
+|--------|--------|
+| `ys` | Add surround |
+| `yss` | Surround line |
+| `yS` | Surround motion (new lines) |
+| `ySS` | Surround line (new lines) |
+| `ds` | Delete surround |
+| `cs` | Change surround |
 
-* **`<Leader> gs`**: **Fugitive**. Git status and staging.
-* **`<Leader> u`**: **UndoTree**. Visual undo history.
-* **`<Leader> s`**: Global Search & Replace. Populates word under cursor.
-* **`<Leader> x`**: **Chmod +x**. Make current file executable.
-* **`<Leader> mp`**: **Markdown Preview**. Toggle browser view.
-* **`<Leader> ha/hh`**: **Harpoon**. Pin and switch files.
+---
 
-### **5. Execution**
+## LSP
+Built-in Neovim LSP client  
+Code intelligence: rename, refs, actions, navigation.
 
-* **`<Leader> r`**: **Interactive Runner**.
+| Keymap | Action |
+|--------|--------|
+| `grr` | References |
+| `grn` | Rename |
+| `gra` | Code action |
+| `gri` | Implementation |
+| `grt` | Type definition |
+
+---
+
+## Trouble
+Plugin: `trouble.nvim`  
+Diagnostics + quickfix viewer UI.
+
+| Keymap | Action |
+|--------|--------|
+| `<leader>d` | Diagnostics |
+| `<leader>xf` | Buffer diagnostics |
+
+---
+
+## Harpoon
+Plugin: `harpoon`  
+Quick file bookmarks + jump system.
+
+| Keymap | Action |
+|--------|--------|
+| `<leader>ha` | Add file |
+| `<leader>hh` | Open menu |
+
+---
+
+## Undotree
+Plugin: `undotree`  
+Visual undo history tree.
+
+| Keymap | Action |
+|--------|--------|
+| `<leader>u` | Toggle undo tree |
+
+---
+
+## File Explorer
+Plugins: `neo-tree.nvim`, `oil.nvim`  
+Tree + minimal filesystem navigation.
+
+| Keymap | Action |
+|--------|--------|
+| `<leader>e` | File explorer |
+| `-` | Parent directory (oil) |
+
+---
+
+## Git
+Plugins: `vim-fugitive`, `gitsigns.nvim`  
+Git integration + diff + staging.
+
+| Keymap | Action |
+|--------|--------|
+| `<leader>gs` | Git status |
+
+---
+
+## Debug (DAP)
+Plugin: `nvim-dap`  
+Debugger integration for breakpoints + stepping.
+
+| Keymap | Action |
+|--------|--------|
+| `<F5>` | Continue |
+| `<F1>` | Step into |
+| `<F2>` | Step over |
+| `<F3>` | Step out |
+| `<F7>` | Last session |
+| `<leader>b` | Toggle breakpoint |
+| `<leader>B` | Set breakpoint |
+
+---
+
+## Markdown
+Plugin: `markdown-preview.nvim`  
+Live markdown preview in browser.
+
+| Keymap | Action |
+|--------|--------|
+| `<leader>mp` | Preview markdown |
+
+---
+
+## Navigation (custom)
+Small workflow shortcuts.
+
+| Keymap | Action |
+|--------|--------|
+| `<leader>nh` | Clear search highlight |
+| `<leader>;` | Command mode |
+| `<leader>x` | chmod +x current file |
+| `<leader>s` | Substitute word under cursor |
+
+---
+
+## Window navigation
+Built-in window movement.
+
+| Keymap | Action |
+|--------|--------|
+| `<C-h>` | Move left |
+| `<C-j>` | Move down |
+| `<C-k>` | Move up |
+| `<C-l>` | Move right |
+
+---
+
+## Completion
+Plugins: `nvim-cmp`, `blink.cmp`, `LuaSnip`  
+Autocompletion + snippets engine.
+
+| Keymap | Action |
+|--------|--------|
+| `<Tab>` | Next completion |
+| `<S-Tab>` | Previous completion |
+
+---
+
+##  Execution
+
+| Keymap | Action |
+|--------|--------|
+| `<leader>r` | Interactive Runner |
+
 * **C**: `gcc [file] -o out && ./out`
 * **Python**: `python3 [file]`
 * **Bash**: `bash [file]`
 * **Lua**: `source %`
+
+## Notes
+- Leader: `<Space>`
+- Completion + snippets handled by multiple engines (`cmp`, `blink`, `luasnip`)
+- Many LSP defaults not listed unless overridden
+
+
 
 ```
