@@ -12,12 +12,23 @@ set -g fish_greeting
 # Editor
 set -gx EDITOR nvim
 
+# History settings
+set -U fish_history 10000
+
+# Prompt spacing
+set -g fish_prompt_pwd_dir_length 3
+
 # Better PATH
 fish_add_path ~/.local/bin
 fish_add_path ~/.cargo/bin
 
+# Vi mode
+fish_vi_key_bindings
+
 # Starship prompt
 starship init fish | source
+# FZF keybindings
+fzf --fish | source
 
 # Better ls using eza
 alias ls="eza --icons"
@@ -25,18 +36,23 @@ alias ll="eza -lah --icons --group-directories-first"
 alias la="eza -a --icons"
 alias lt="eza --tree --level=2 --icons"
 
+# Navigation
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+
 # Better cat
 alias cat="batcat"
-
-alias cd="z"
-
-# neovim alias
-abbr nv 'nvim'
 
 # Safer commands
 alias cp="cp -i"
 alias mv="mv -i"
 alias rm="rm -i"
+alias mkdir="mkdir -p"
+alias free="free -h"
+alias df="df -h"
+
+
 
 # Git shortcuts
     abbr lg 'lazygit'
@@ -59,16 +75,8 @@ alias rm="rm -i"
 
 abbr -a paru 'paru -S --needed'
 
-# Navigation
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-
-# Zoxide
-zoxide init fish | source
-
-# FZF keybindings
-fzf --fish | source
+# neovim 
+abbr nv 'nvim'
 
 # Colored man pages
 set -gx LESS_TERMCAP_mb (printf "\e[1;32m")
@@ -79,12 +87,16 @@ set -gx LESS_TERMCAP_so (printf "\e[01;33m")
 set -gx LESS_TERMCAP_ue (printf "\e[0m")
 set -gx LESS_TERMCAP_us (printf "\e[1;4;31m")
 
-# Vi mode
-fish_vi_key_bindings
 
-# History settings
-set -U fish_history 10000
 
-# Prompt spacing
-set -g fish_prompt_pwd_dir_length 3
+
+# Other 
+
+alias ports="ss -tulpen"
+alias myip="curl ifconfig.me"
+alias ducks="du -sh * | sort -h"
+alias duf="duf"
+alias top="btop"
+alias du="du -h --max-depth=1"
+alias duall="du -ah"
 

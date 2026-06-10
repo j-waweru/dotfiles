@@ -1,4 +1,20 @@
-# Nvim opl book notes
+# Vim Motions Cheatsheet
+
+. repeats the last change
+; repeats the last command
+, repeats backwards 
+
+Ctrl [ - same as escape
+C deletes to the end of line
+cc deletes entire line and enters insert mode
+P pastes before instead of after like p
+
+
+
+
+---
+
+## Nvim opl book notes
 
 ## Editing a little faster.  
 ctrl-] --> moves into a tag,  
@@ -64,6 +80,10 @@ The :split command splits the window into two.
 
 :new file - similar to split except it open the new file in the other window    
 :sview - look at but not edit a file    
+
+
+
+
 
 
 

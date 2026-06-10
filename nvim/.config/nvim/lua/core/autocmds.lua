@@ -1,6 +1,9 @@
 local au = vim.api.nvim_create_autocmd
 local group = vim.api.nvim_create_augroup
 
+local key = vim.keymap.set
+vim.g.mapleader = " "
+
 -- 1. FIX: Highlight on Yank
 au('TextYankPost', {
     desc = 'Highlight when yanking text',
@@ -33,6 +36,25 @@ au({ "InsertLeave", "TextChanged" }, {
                end
                end,
 })
+
+
+
+-- Run Code
+key('n', '<leader>r', function()
+local ft = vim.bo.filetype
+local cmd = ""
+if ft == "python" then cmd = "python3 " .. vim.fn.expand("%")
+    elseif ft == "c" then cmd = "gcc " .. vim.fn.expand("%") .. " -o out && ./out"
+        elseif ft == "sh" then cmd = "bash " .. vim.fn.expand("%")
+            elseif ft == "lua" then vim.cmd("source %") return end
+
+                if cmd ~= "" then
+                    vim.cmd("split | term " .. cmd)
+                    vim.cmd("resize 10")
+                    vim.cmd("startinsert")
+                    end
+                    end)
+
 
 -- 3. FIX: Persistent Line Number Colors
 -- This ensures that even if Ayu or Transparent.nvim loads late,

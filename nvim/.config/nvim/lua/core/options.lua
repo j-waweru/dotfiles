@@ -1,7 +1,7 @@
 local opt = vim.opt
 
 -- Enable spell checking
-opt.spell = true
+opt.spell = false
 opt.spelllang = { 'en' }
 
 -- FOLDING SETTINGS (VSCode Style)

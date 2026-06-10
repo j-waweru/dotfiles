@@ -1,15 +1,13 @@
 add_newline = true
 
-# Left side prompt
 format = """
-[╭─](bold green)$username $directory
+[╭─](bold green)$username $directory$fill$git_branch$git_status$cmd_duration$python
 [╰─❯](bold green) """
 
-# Right side prompt
-right_format = """$fill$git_branch$git_status$cmd_duration$python"""
 
 [fill]
 symbol = "."
+style = "bright-black"
 
 [python]
 format = '[(\($virtualenv\) )]($style)'

@@ -1,6 +1,8 @@
 return {
 
-    -- MASON: Binary manager
+    -- =========================================
+    -- MASON CORE
+    -- =========================================
     {
         "williamboman/mason.nvim",
         cmd = "Mason",
@@ -11,18 +13,21 @@ return {
                 icons = {
                     package_installed = "✓",
                     package_pending = "➜",
-                    package_uninstalled = "✗"
-                }
-            }
+                    package_uninstalled = "✗",
+                },
+            },
         },
     },
 
-    -- TOOL INSTALLER: Auto-download formatters and LSPs
+    -- =========================================
+    -- TOOL INSTALLER
+    -- =========================================
     {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
         dependencies = { "williamboman/mason.nvim" },
         opts = {
             ensure_installed = {
+
                 -- LSPs
                 "clangd",
                 "asm-lsp",
@@ -30,84 +35,158 @@ return {
                 "marksman",
                 "lua-language-server",
                 "bash-language-server",
-                -- Formatters
-                "stylua",
-                "black",
+
+                -- Web
+                "typescript-language-server",
+                "html-lsp",
+                "css-lsp",
+                "tailwindcss-language-server",
+                "emmet-language-server",
+                "json-lsp",
+                "eslint-lsp",
+
+                -- C/C++
                 "clang-format",
+
+                -- Rust
+                "rust-analyzer",
+
+                -- Go
+                "gopls",
+                "goimports",
+                "gofumpt",
+
+                -- Python
+                "black",
+                "isort",
+                "ruff",
+                "debugpy",
+
+                -- PowerShell
+                "powershell-editor-services",
+
+                -- Bash
+                "shellcheck",
+                "shfmt",
+
+                -- Lua
+                "stylua",
+
+                -- Markdown
+                "markdownlint",
+
+                -- YAML / TOML
+                "yaml-language-server",
+                "taplo",
+
+                -- Docker
+                "dockerfile-language-server",
+                "docker-compose-language-service",
+
+                -- SQL
+                "sqlfluff",
+
+                -- Misc
+                "prettierd",
+                "biome",
             },
             auto_update = true,
             run_on_start = true,
         },
     },
 
-    -- LSP CONFIG: Neovim 0.11/0.12 Native API
+    -- =========================================
+    -- LSP CONFIG
+    -- =========================================
     {
         "neovim/nvim-lspconfig",
-        dependencies = { 
+        dependencies = {
             "hrsh7th/cmp-nvim-lsp",
-            "williamboman/mason-lspconfig.nvim",
-            "WhoIsSethDaniel/mason-tool-installer.nvim",
+            "williamboman/mason.nvim",
+            "mason-org/mason-lspconfig.nvim",
         },
+
         config = function()
-            require("mason-lspconfig").setup()
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-            local capabilities = require('cmp_nvim_lsp').default_capabilities()
-            local servers = { 'clangd', 'asm_lsp', 'pyright', 'marksman', 'lua_ls', 'bashls' }
+            -- IMPORTANT: auto-enable servers
+            require("mason-lspconfig").setup({
+                automatic_enable = true,
+            })
 
-            -- Config and Enable loop
-            for _, lsp in ipairs(servers) do
-                vim.lsp.config(lsp, {
-                    capabilities = capabilities
-                })
-                vim.lsp.enable(lsp)
-            end
+            -- global LSP config
+            vim.lsp.config("*", {
+                capabilities = capabilities,
+            })
 
-            -- High-visibility diagnostic settings
-            vim.diagnostic.config({
-                virtual_text = {
-                    severity = { min = vim.diagnostic.severity.ERROR },
-                    prefix = '●'
+            -- lua special config
+            vim.lsp.config("lua_ls", {
+                capabilities = capabilities,
+                settings = {
+                    Lua = {
+                        diagnostics = {
+                            globals = { "vim" },
+                        },
+                    },
                 },
-                signs = { severity = { min = vim.diagnostic.severity.ERROR } },
-                underline = { severity = { min = vim.diagnostic.severity.ERROR } },
-                severity_sort = true,
             })
 
-            -- Native keybinds
-            vim.api.nvim_create_autocmd('LspAttach', {
-                callback = function(event)
-                    local opts = { buffer = event.buf }
-                    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-                    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-                end,
-            })
-        end
+            -- diagnostics
+            vim.diagnostic.config({
+    virtual_text = {
+        severity = { min = vim.diagnostic.severity.WARN },
+        prefix = "●",
+        spacing = 2,
     },
 
-    -- CONFORM: Auto-format
+    signs = false,
+    underline = true,
+    update_in_insert = false,
+    severity_sort = true,
+})
+
+            -- LSP keymaps
+            vim.api.nvim_create_autocmd("LspAttach", {
+                callback = function(event)
+                    local opts = { buffer = event.buf }
+
+                    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+                    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+                    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+                    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+                    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+                end,
+            })
+        end,
+    },
+
+    -- =========================================
+    -- CONFORM
+    -- =========================================
     {
         "stevearc/conform.nvim",
-        dependencies = { "WhoIsSethDaniel/mason-tool-installer.nvim" },
         config = function()
             require("conform").setup({
-                formatters_by_ft = { 
-                    lua = { "stylua" }, 
-                    python = { "black" }, 
-                    c = { "clang-format" } 
+                formatters_by_ft = {
+                    lua = { "stylua" },
+                    python = { "black" },
+                    c = { "clang-format" },
                 },
                 format_on_save = {
                     timeout_ms = 500,
                     lsp_fallback = true,
                 },
             })
-        end
+        end,
     },
 
-    -- FUGITIVE: Git integration
-    { 
+    -- =========================================
+    -- FUGITIVE
+    -- =========================================
+    {
         "tpope/vim-fugitive",
-        config = function()
-            vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
-        end
+        keys = {
+            { "<leader>gs", vim.cmd.Git, mode = "n", desc = "Git Status" },
+        },
     },
 }
