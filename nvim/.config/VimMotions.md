@@ -1,13 +1,105 @@
-# Vim Motions Cheatsheet
+# Practical vim by Drew Neil 
 
-. repeats the last change
-; repeats the last command
-, repeats backwards 
+/search - search through the term
+`*` - pressing starts a search of the word under the cursor 
+
+. - repeats the last change
+U - undo the last change
+; - repeats the last command
+, - repeats the last f search backwards 
+n - move through searchs
+N - move backwards through searchs
+
+
 
 Ctrl [ - same as escape
-C deletes to the end of line
-cc deletes entire line and enters insert mode
-P pastes before instead of after like p
+C - deletes to the end of line
+cc - deletes entire line and enters insert mode
+P - pastes before instead of after like p
+
+A - move to the end of the current line and enter insert mode 
+I - move to the start of the current line and enter insert mode 
+s - same as x and i. deletes the char under the cursor and enter insert mode 
+
+> [!TIP]
+> Repeating a command causes it to work on an entire line 
+
+= - auto indents
+*> - indents the selected text *
+*>> - indets the current line *
+*>G - indents to the end of the file*
+*>gg - indents to the start of the file*
+*> (jk) - indents the current line and the above or below*
+
+
+### The vim way 
+
+> [!TIP]
+> The dot command 
+
+In insert mode Vim records every keystroke so :
+    If i want to put a semi colon at the end of many lines I can 
+        add the semi colon and then 
+        j. 
+        to repeat the change to the next line
+
+or if i want to convert **var foo = "method("+argument1+","+argument2+")";**  to **var foo = "method(" + argument1 + "," + argument2 + ")";**
+    f+ 
+    i 
+    delete the +
+    insert *space plus space* (delete)
+    ; - to repeat the f+
+    . - to repeat the change 
+
+Lets say that were to change some but not all occurences of a word 
+    `*` - to start a search for the word under the cursor
+    cw new_word - to replace 
+    n - to move to the next occurence of the word we want to replace 
+    . - to repeat the cw command
+
+
+## Modes
+
+### Normal mode 
+
+In vim the undo command has different granularity.
+When we enter insert mode that also counts as a change and the undo command will **undo until the last time we hit undo**
+So controlling how often we hit u, we can control how much we undo
+
+As a general rule, if you’ve paused for long enough to ask the question, “Should I leave Insert mode?” 
+
+> [!WARNING]
+If we use the <Up> , <Down> , <Left> , or <Right> cursor keys while in Insert mode, a new undo
+chunk is created. It’s just as though we had switched back to Normal mode to move
+around with the h , j , k , or l commands, except that we don’t have to leave Insert mode. 
+This also has implications on the operation of the dot command.
+
+> [!TIP]
+Text objects - define the kind of text objects to operate on
+
+:help aw - to see the different types of objects 
+
+l - character
+w - word
+W - contiguous text
+s - sentence
+p - paragraph
+{ - closest enclosing brackets
+t - tag eg html tags
+
+
+<C-a> and <C-x> commands perform addition and subtraction on the number under the cursor or the next occurence scoped to a word object.
+10<C-a> - will add 10 to the number
+
+
+gUaw - capitalizes the text object specified 
+gu - lower case
+g~ - swap the cases 
+
+## Insert Mode 
+
+
+
 
 
 

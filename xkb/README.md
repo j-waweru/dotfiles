@@ -80,6 +80,10 @@ gsettings reset org.gnome.desktop.input-sources sources
 gsettings reset org.gnome.desktop.input-sources mru-sources
 gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('xkb', 'unreal-prog-dvorak')]"
 
+
+gsettings set org.gnome.desktop.input-sources xkb-options "[]"
+gsettings set org.gnome.desktop.input-sources xkb-options "['caps:ctrl_modifier']"
+
 ```
 
 ---

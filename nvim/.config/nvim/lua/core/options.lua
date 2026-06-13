@@ -1,5 +1,6 @@
 local opt = vim.opt
 
+opt.nrformats ={} 
 -- Enable spell checking
 opt.spell = false
 opt.spelllang = { 'en' }

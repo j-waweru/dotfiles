@@ -2,52 +2,68 @@ return {
     -- COMPLETION & EDITING TOOLS
     {
         "hrsh7th/nvim-cmp",
-        dependencies = { 
-            "L3MON4D3/LuaSnip", 
-            "saadparwaiz1/cmp_luasnip",      -- Added: Bridge between cmp and luasnip
-            "rafamadriz/friendly-snippets",  -- Added: The VSCode snippet collection
-            "windwp/nvim-autopairs" 
+        dependencies = {
+            "L3MON4D3/LuaSnip",
+            "saadparwaiz1/cmp_luasnip",
+            "rafamadriz/friendly-snippets",
+            "windwp/nvim-autopairs",
         },
         config = function()
-            local cmp = require('cmp')
-            local luasnip = require('luasnip')
+            local cmp = require("cmp")
+            local luasnip = require("luasnip")
 
-            -- Load VSCode snippets from friendly-snippets
+            -- Load VSCode snippets
             require("luasnip.loaders.from_vscode").lazy_load()
 
             cmp.setup({
-                snippet = { 
-                    expand = function(args) luasnip.lsp_expand(args.body) end 
+                snippet = {
+                    expand = function(args)
+                        luasnip.lsp_expand(args.body)
+                    end,
                 },
-                mapping = cmp.mapping.preset.insert({
-                    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-                    ['<Tab>'] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_next_item()
-                        elseif luasnip.expand_or_locally_jumpable() then
+
+                mapping = {
+                    -- Trigger completion menu
+                    ["<C-Space>"] = cmp.mapping.complete(),
+
+                    -- Next item
+                    ["<C-n>"] = cmp.mapping.select_next_item(),
+
+                    -- Previous item
+                    ["<C-p>"] = cmp.mapping.select_prev_item(),
+
+                    -- Accept selection
+                    ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+                    ["<CR>"] = cmp.mapping.confirm({ select = true }),
+
+                    -- Close menu
+                    ["<C-e>"] = cmp.mapping.abort(),
+
+                    -- Snippet jumping
+                    ["<C-l>"] = cmp.mapping(function(fallback)
+                        if luasnip.expand_or_locally_jumpable() then
                             luasnip.expand_or_jump()
                         else
-                            -- This allows Tabout to work if snippets/cmp aren't active
                             fallback()
                         end
                     end, { "i", "s" }),
-                    ['<S-Tab>'] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_prev_item()
-                        elseif luasnip.locally_jumpable(-1) then
+
+                    ["<C-h>"] = cmp.mapping(function(fallback)
+                        if luasnip.locally_jumpable(-1) then
                             luasnip.jump(-1)
                         else
                             fallback()
                         end
                     end, { "i", "s" }),
-                }),
-                sources = { 
-                    { name = 'nvim_lsp' },
-                    { name = 'luasnip' }, -- Added: Shows snippets in the popup menu
-                    { name = 'buffer' },
-                }
+                },
+
+                sources = {
+                    { name = "nvim_lsp" },
+                    { name = "luasnip" },
+                    { name = "buffer" },
+                },
             })
-        end
+        end,
     },
 
     { "windwp/nvim-autopairs", config = true },
@@ -56,30 +72,30 @@ return {
 
     -- Tabout configuration
     {
-        'abecodes/tabout.nvim',
+        "abecodes/tabout.nvim",
         lazy = false,
         config = function()
-            require('tabout').setup {
-                tabkey = '<Tab>',
-                backwards_tabkey = '<S-Tab>',
+            require("tabout").setup({
+                tabkey = "<Tab>",
+                backwards_tabkey = "<S-Tab>",
                 act_as_tab = true,
-                completion = false, -- CMP handles the tab key when the menu is open
+                completion = false,
                 tabouts = {
                     { open = "'", close = "'" },
                     { open = '"', close = '"' },
-                    { open = '`', close = '`' },
-                    { open = '(', close = ')' },
-                    { open = '[', close = ']' },
-                    { open = '{', close = '}' }
+                    { open = "`", close = "`" },
+                    { open = "(", close = ")" },
+                    { open = "[", close = "]" },
+                    { open = "{", close = "}" },
                 },
-            }
+            })
         end,
         priority = 1000,
     },
 
     {
         "L3MON4D3/LuaSnip",
-        build = "make install_jsregexp", -- Optional: supports complex regex snippets
+        build = "make install_jsregexp",
     },
 
     { "numToStr/Comment.nvim", config = true },
