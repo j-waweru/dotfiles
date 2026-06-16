@@ -33,7 +33,7 @@ return {
       }
 
       -- footer
-      dashboard.section.footer.val = "fast setup · clean workflow · no noise"
+      dashboard.section.footer.val = "I use · Vim  · Btw"
 
       -- layout
       dashboard.config.layout = {

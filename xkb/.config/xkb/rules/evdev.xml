@@ -4,20 +4,9 @@
   <layoutList>
     <layout>
       <configItem>
-        <name>real-prog-dvorak</name>
-        <shortDescription>rpd</shortDescription>
-        <description>English (Real Programmers Dvorak)</description>
-        <languageList>
-          <iso639Id>eng</iso639Id>
-        </languageList>
-      </configItem>
-      <variantList/>
-    </layout>
-    <layout>
-      <configItem>
-        <name>unreal-prog-dvorak</name>
-        <shortDescription>urpd</shortDescription>
-        <description>English (Unreal Programmers Dvorak)</description>
+        <name>prog-qwerty</name>
+        <shortDescription>pqw</shortDescription>
+        <description>English (Programmers Qwerty)</description>
         <languageList>
           <iso639Id>eng</iso639Id>
         </languageList>

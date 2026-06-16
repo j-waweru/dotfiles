@@ -1,5 +1,6 @@
 -- nvim v0.8.0
 return {
+{
     "kdheepak/lazygit.nvim",
     lazy = true,
     cmd = {
@@ -18,4 +19,7 @@ return {
     keys = {
         { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
     }
+    },
+    
+    
 }

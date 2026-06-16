@@ -4,7 +4,7 @@ return {
 	cmd = "Trouble",
 	keys = {
 		{ "<leader>d", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
-		{ "<leader>xf", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
+		{ "<leader>df", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
 	},
 	opts = {},
 }

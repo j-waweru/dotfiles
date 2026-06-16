@@ -40,7 +40,6 @@ return {
                 "typescript-language-server",
                 "html-lsp",
                 "css-lsp",
-                "tailwindcss-language-server",
                 "emmet-language-server",
                 "json-lsp",
                 "eslint-lsp",
@@ -71,9 +70,6 @@ return {
 
                 -- Lua
                 "stylua",
-
-                -- Markdown
-                "markdownlint",
 
                 -- YAML / TOML
                 "yaml-language-server",
@@ -178,15 +174,5 @@ return {
                 },
             })
         end,
-    },
-
-    -- =========================================
-    -- FUGITIVE
-    -- =========================================
-    {
-        "tpope/vim-fugitive",
-        keys = {
-            { "<leader>gs", vim.cmd.Git, mode = "n", desc = "Git Status" },
-        },
     },
 }
