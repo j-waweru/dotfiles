@@ -33,7 +33,7 @@ return {
       }
 
       -- footer
-      dashboard.section.footer.val = "I use · Vim  · Btw"
+      dashboard.section.footer.val = "I · Use · Vim  · Btw"
 
       -- layout
       dashboard.config.layout = {
