@@ -89,19 +89,33 @@ input {
 
 Install `keyd` via `paru -S keyd` or `sudo apt install keyd` and enable service `sudo systemctl enable --now keyd`.
 
-Update `/etc/keyd/default.conf`:
+mkdir -p /etc/keyd/default.conf
+
+And add ; 
+
+sudo nvim /etc/keyd/default.conf 
 
 ```ini
 [ids]
 *
 
 [main]
-# Modifier remaps
-capslock = leftcontrol
-leftalt = leftshift
-leftshift = leftalt
+
+enter = right 
+esc = capslock
+
+leftalt = backspace
 rightalt = enter
+
 rightshift = rightalt
+
+capslock = rightcontrol 
+
+compose = esc
+rightcontrol = compose 
+
+space = overload(shift, space)
+
 
 ```
 
