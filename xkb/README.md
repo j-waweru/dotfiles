@@ -1,16 +1,18 @@
 
-# ⌨️ Programmer's Qwerty — Installation Guide
+# ⌨️ Custom Keyboard layout config — Installation Guide
 
-Complete setup instructions to deploy my custom programmers qwerty layout.
+Includes two keyboard layouts for a custom qwerty and dvorak layout
+
 Inspired by the primeagen's layout.
 
 
 ### Base layer 
 ![Programmers qwerty](./base.png)
+![Programmers dvorak](./base2.png)
 
 ### Shift layer
 ![Programmers qwerty](./shift.png)
-
+![Programmers dvorak](./shift2.png)
 
 ## 🐧 Linux Setup Steps (CachyOS, Ubuntu, Kali, REMnux)
 
@@ -54,7 +56,7 @@ Force the background window system environment to flush its active source layout
 ```bash
 gsettings reset org.gnome.desktop.input-sources sources
 gsettings reset org.gnome.desktop.input-sources mru-sources
-gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('xkb', 'prog-qwerty')]"
+gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('xkb', 'prog-qwerty'), ('xkb', 'unreal-prog-dvorak')]"
 
 ```
 
@@ -72,7 +74,7 @@ Update the `input` block:
 ```text
 input {
     kb_layout = us
-    kb_variant = prog-qwerty
+    kb_variant = prog-qwerty , unreal-prog-dvorak
 }
 
 ```
@@ -81,7 +83,7 @@ input {
 
 1. Open **Settings** -> **Keyboard** -> **Layout** tab selection.
 2. Toggle off the **Use system defaults** selector checkbox.
-3. Click **Add**, find and select `English (Programmers Qwerty)`.
+3. Click **Add**, find and select `English (Programmers Qwerty)`or `English (Unreal Programmers Dvorak)`
 
 ---
 
