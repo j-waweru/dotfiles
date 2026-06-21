@@ -19,9 +19,10 @@ truncate_to_repo = false
 
 [git_branch]
 symbol = " "
+style = "cyan"
 
 [git_status]
-style = "bold yellow"
+style = "red"
 
 [cmd_duration]
 min_time = 500
