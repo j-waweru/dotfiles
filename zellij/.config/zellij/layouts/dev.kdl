@@ -1,0 +1,49 @@
+layout {
+    pane size=1 borderless=true {
+        plugin location="zellij:tab-bar"
+    }
+
+    pane split_direction="horizontal" {
+
+        // MAIN: Neovim (bigger)
+        pane size="75%" {
+            command "nvim"
+        }
+
+        // RIGHT: pentest workflow stack
+        pane split_direction="vertical" {
+
+            // TOP: recon / scanning
+            pane size="50%" {
+                command "bash"
+                args "-lc"
+                args "echo 'recon / scan'; echo 'nmap, rustscan, ffuf, gobuster'; exec bash"
+            }
+
+            // MIDDLE: target shell (manual testing)
+            pane {
+                command "bash"
+                args "-lc"
+                args "echo 'target shell'; exec bash"
+            }
+
+            // BOTTOM: notes + logs
+            pane split_direction="horizontal" {
+
+                pane {
+                    command "bash"
+                    args "-lc"
+                    args "echo 'notes / logs'; exec bash"
+                }
+
+                pane {
+                    command "bash"
+                }
+            }
+        }
+    }
+
+    pane size=1 borderless=true {
+        plugin location="zellij:status-bar"
+    }
+}
