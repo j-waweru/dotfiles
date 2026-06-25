@@ -1,4 +1,7 @@
 -- 1. Load your core settings first
+vim.opt.runtimepath:append("/home/waweru/.local/share/nvim/site/")
+vim.lsp.semantic_tokens.enable(true)
+
 require("core.options")
 require("core.keymaps")
 require("core.autocmds")

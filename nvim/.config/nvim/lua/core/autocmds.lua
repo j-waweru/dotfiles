@@ -59,6 +59,9 @@ key("n", "<leader>r", function()
 	end
 end)
 
+
+
+--------overide-------------------------
 -- 3. FIX: Persistent Line Number Colors
 -- This ensures that even if Ayu or Transparent.nvim loads late,
 -- your custom line number colors are forced back on top.
@@ -70,7 +73,8 @@ au("ColorScheme", {
 		hl(0, "LineNrAbove", { fg = "#a8a8a8" })
 		hl(0, "LineNrBelow", { fg = "#a8a8a8" })
 		hl(0, "CursorLineNr", { fg = "#ffcc66", bold = true })
-		hl(0, "FoldColumn", { fg = "#ffcc66" })
 		hl(0, "Comment", { fg = "#8FA1B3", italic = true })
+		hl(0, "IblIndent", { fg = "#4f4f4f" })
+      		hl(0, "IblScope", { fg = "#ffcc66", bold = true })
 	end,
 })

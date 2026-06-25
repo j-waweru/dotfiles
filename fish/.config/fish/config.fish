@@ -52,6 +52,7 @@ alias mkdir="mkdir -p"
 alias free="free -h"
 alias df="df -h"
 
+abbr keyd 'keyd.rvaiya'
 
 
 # Git shortcuts
