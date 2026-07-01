@@ -7,7 +7,8 @@ This repository contains configuration files for:
 - Kitty
 - Neovim
 - Fish shell and starship
-- Real Programmers Dvorak (ThePrimeagen)
+- xkb and keyd 
+- Zellij
 
 The setup uses symbolic links managed by GNU Stow to keep configs organized, portable, and version controlled.
 
@@ -26,9 +27,10 @@ The setup uses symbolic links managed by GNU Stow to keep configs organized, por
 └── starship/
 |   └── .config/starship.toml/
 └── xkb/
-    ├── README.md  
-    └── .config/
-        └── xkb/
+|    ├── README.md  
+|    └── .config/xkb/
+└── keyd/
+    └── etc/keyd/default.conf
 
 ```
 
@@ -83,6 +85,7 @@ Use Stow to create symlinks:
 stow kitty
 stow nvim
 stow fish
+sudo stow --target=/ keyd
 ```
 
 Or stow everything at once:
