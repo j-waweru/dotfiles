@@ -101,3 +101,13 @@ alias top="btop"
 alias du="du -h --max-depth=1"
 alias duall="du -ah"
 
+
+# zoxide
+zoxide init fish | source
+
+# Make sure ~/.local/bin is on PATH
+fish_add_path ~/.local/bin
+
+# Aliases
+alias z="sessionizer"
+alias zj="zellij"
