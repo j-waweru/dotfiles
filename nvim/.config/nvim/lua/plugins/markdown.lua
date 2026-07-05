@@ -38,20 +38,4 @@ return {
     },
 },
 
-    -- MARKDOWN PREVIEW
-    {
-        "iamcco/markdown-preview.nvim",
-        build = "cd app && npm install",
-        ft = "markdown",
-
-        keys = {
-            {
-                "<leader>mp",
-                "<cmd>MarkdownPreviewToggle<cr>",
-                mode = "n",
-                desc = "Markdown Preview",
-            },
-        },
-    },
-
 }
