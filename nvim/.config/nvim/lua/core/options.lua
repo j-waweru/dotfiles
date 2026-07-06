@@ -44,3 +44,7 @@ opt.splitright = true
 -- Ensure you have 'wl-clipboard' installed (for Wayland) or 'xclip' (for X11)
 opt.clipboard = "unnamedplus"
 
+
+opt.undofile = true
+opt.undodir = vim.fn.expand('~/.config/nvim/undo_dir')
+

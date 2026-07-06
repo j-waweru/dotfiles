@@ -3,6 +3,7 @@
 # ==========================================
 .netrwhist
 undo/
+undo_dir/
 .repro/
 *.log
 
@@ -46,4 +47,4 @@ lazy-vim.json
 .DS_Store
 *.swp
 *.swo
-
+*.un~
