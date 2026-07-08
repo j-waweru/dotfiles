@@ -1,18 +1,16 @@
 
 # ⌨️ Custom Keyboard layout config — Installation Guide
 
-Includes two keyboard layouts for a custom qwerty and dvorak layout
+Includes two keyboard layouts for a custom qwerty and dvorak layout in the xkb dir.
 
 Inspired by the primeagen's layout.
 
 
 ### Base layer 
-![Programmers qwerty](./base.png)
-![Programmers dvorak](./base2.png)
+![Programmers dvorak](./base.png)
 
 ### Shift layer
-![Programmers qwerty](./shift.png)
-![Programmers dvorak](./shift2.png)
+![Programmers dvorak](./shift.png)
 
 ## 🐧 Linux Setup Steps (CachyOS, Ubuntu, Kali, REMnux)
 
@@ -56,7 +54,7 @@ Force the background window system environment to flush its active source layout
 ```bash
 gsettings reset org.gnome.desktop.input-sources sources
 gsettings reset org.gnome.desktop.input-sources mru-sources
-gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('xkb', 'prog-qwerty'), ('xkb', 'unreal-prog-dvorak')]"
+gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'),('xkb', 'unreal-prog-dvorak')]"
 
 ```
 
@@ -74,7 +72,7 @@ Update the `input` block:
 ```text
 input {
     kb_layout = us
-    kb_variant = prog-qwerty , unreal-prog-dvorak
+    kb_variant = unreal-prog-dvorak
 }
 
 ```
@@ -83,7 +81,7 @@ input {
 
 1. Open **Settings** -> **Keyboard** -> **Layout** tab selection.
 2. Toggle off the **Use system defaults** selector checkbox.
-3. Click **Add**, find and select `English (Programmers Qwerty)`or `English (Unreal Programmers Dvorak)`
+3. Click **Add**, find and select `English (Unreal Programmers Dvorak)`
 
 ---
 
@@ -98,26 +96,16 @@ And add ;
 sudo nvim /etc/keyd/default.conf 
 
 ```ini
-[ids]
-*
 
-[main]
-
-enter = right 
 esc = capslock
 
-leftalt = backspace
-rightalt = enter
+leftalt = overload(alt, backspace)
 
-rightshift = rightalt
+rightalt = overload(altgr, enter)
 
-capslock = rightcontrol 
-
-compose = esc
-rightcontrol = compose 
+capslock = overload(control, esc)
 
 space = overload(shift, space)
-
 
 ```
 
