@@ -77,7 +77,7 @@ alias keyd='/usr/bin/keyd.rvaiya'
 abbr -a paru 'paru -S --needed'
 
 # neovim 
-abbr nv 'nvim'
+abbr nv 'nvim $(fzf)'
 
 # Colored man pages
 set -gx LESS_TERMCAP_mb (printf "\e[1;32m")
