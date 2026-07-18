@@ -1,4 +1,5 @@
 local key = vim.keymap.set
+
 vim.g.mapleader = " "
 
 -- Search & Replace
@@ -13,5 +14,7 @@ key("n", "<C-h>", "<C-w>h")
 key("n", "<C-j>", "<C-w>j")
 key("n", "<C-k>", "<C-w>k")
 key("n", "<C-l>", "<C-w>l")
+-- Save and quit with <Leader>wq
+key("n", "<Leader>e", "<Cmd>wq<CR>", { desc = "Save and quit" })
 
 key("t", "<Esc><Esc>", [[<C-\><C-n>]])

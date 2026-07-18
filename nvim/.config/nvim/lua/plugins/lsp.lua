@@ -1,178 +1,219 @@
 return {
 
-    -- =========================================
-    -- MASON CORE
-    -- =========================================
-    {
-        "williamboman/mason.nvim",
-        cmd = "Mason",
-        build = ":MasonUpdate",
-        opts = {
-            ui = {
-                border = "rounded",
-                icons = {
-                    package_installed = "✓",
-                    package_pending = "➜",
-                    package_uninstalled = "✗",
-                },
-            },
-        },
-    },
+	-- =========================================
+	-- MASON CORE
+	-- =========================================
+	{
+		"williamboman/mason.nvim",
+		cmd = "Mason",
+		build = ":MasonUpdate",
+		opts = {
+			ui = {
+				border = "rounded",
+				icons = {
+					package_installed = "✓",
+					package_pending = "➜",
+					package_uninstalled = "✗",
+				},
+			},
+		},
+	},
 
-    -- =========================================
-    -- TOOL INSTALLER
-    -- =========================================
-    {
-        "WhoIsSethDaniel/mason-tool-installer.nvim",
-        dependencies = { "williamboman/mason.nvim" },
-        opts = {
-            ensure_installed = {
+	-- =========================================
+	-- LSP STATUS
+	-- =========================================
+	{
+		"j-hui/fidget.nvim",
+		opts = {},
+	},
 
-                -- LSPs
-                "clangd",
-                "asm-lsp",
-                "pyright",
-                "marksman",
-                "lua-language-server",
-                "bash-language-server",
+	-- =========================================
+	-- TOOL INSTALLER
+	-- =========================================
+	{
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		dependencies = { "williamboman/mason.nvim" },
+		opts = {
+			ensure_installed = {
 
-                -- Web
-                "typescript-language-server",
-                "html-lsp",
-                "css-lsp",
-                "emmet-language-server",
-                "json-lsp",
-                "eslint-lsp",
+				-- LSPs
+				"clangd",
+				"asm-lsp",
+				"pyright",
+				"marksman",
+				"lua-language-server",
+				"bash-language-server",
 
-                -- C/C++
-                "clang-format",
+				-- Web
+				"typescript-language-server",
+				"html-lsp",
+				"css-lsp",
+				"emmet-language-server",
+				"json-lsp",
+				"eslint-lsp",
 
-                -- Rust
-                "rust-analyzer",
+				-- C/C++
+				"clang-format",
 
-                -- Go
-                "gopls",
-                "goimports",
-                "gofumpt",
+				-- Rust
+				"rust-analyzer",
 
-                -- Python
-                "black",
-                "isort",
-                "ruff",
-                "debugpy",
+				-- Go
+				"gopls",
+				"goimports",
+				"gofumpt",
 
-                -- PowerShell
-                "powershell-editor-services",
+				-- Python
+				"black",
+				"isort",
+				"ruff",
+				"debugpy",
 
-                -- Bash
-                "shellcheck",
-                "shfmt",
+				-- PowerShell
+				"powershell-editor-services",
 
-                -- Lua
-                "stylua",
+				-- Bash
+				"shellcheck",
+				"shfmt",
 
-                -- YAML / TOML
-                "yaml-language-server",
-                "taplo",
+				-- Lua
+				"stylua",
 
-                -- Docker
-                "dockerfile-language-server",
-                "docker-compose-language-service",
+				-- YAML / TOML
+				"yaml-language-server",
+				"taplo",
 
-                -- SQL
-                "sqlfluff",
+				-- Docker
+				"dockerfile-language-server",
+				"docker-compose-language-service",
 
-                -- Misc
-                "prettierd",
-                "biome",
-            },
-            auto_update = true,
-            run_on_start = true,
-        },
-    },
+				-- SQL
+				"sqlfluff",
 
-    -- =========================================
-    -- LSP CONFIG
-    -- =========================================
-    {
-        "neovim/nvim-lspconfig",
-        dependencies = {
-            "hrsh7th/cmp-nvim-lsp",
-            "williamboman/mason.nvim",
-            "mason-org/mason-lspconfig.nvim",
-        },
+				-- Misc
+				"prettierd",
+				"biome",
+			},
+			auto_update = true,
+			run_on_start = true,
+		},
+	},
 
-        config = function()
-            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+	-- =========================================
+	-- LSP CONFIG
+	-- =========================================
+	{
+		"neovim/nvim-lspconfig",
+		dependencies = {
+			"williamboman/mason.nvim",
+			"mason-org/mason-lspconfig.nvim",
+			"hrsh7th/cmp-nvim-lsp",
+			"j-hui/fidget.nvim",
+		},
 
-            -- IMPORTANT: auto-enable servers
-            require("mason-lspconfig").setup({
-                automatic_enable = true,
-            })
+		config = function()
+			local cmp_lsp = require("cmp_nvim_lsp")
 
-            -- global LSP config
-            vim.lsp.config("*", {
-                capabilities = capabilities,
-            })
+			local capabilities = vim.tbl_deep_extend(
+				"force",
+				{},
+				vim.lsp.protocol.make_client_capabilities(),
+				cmp_lsp.default_capabilities()
+			)
 
-            -- lua special config
-            vim.lsp.config("lua_ls", {
-                capabilities = capabilities,
-                settings = {
-                    Lua = {
-                        diagnostics = {
-                            globals = { "vim" },
-                        },
-                    },
-                },
-            })
+			require("mason-lspconfig").setup({
+				automatic_enable = true,
+			})
 
-            -- diagnostics
-            vim.diagnostic.config({
-    virtual_text = {
-        severity = { min = vim.diagnostic.severity.WARN },
-        prefix = "●",
-        spacing = 2,
-    },
+			-- Default config for every server
+			vim.lsp.config("*", {
+				capabilities = capabilities,
+			})
 
-    signs = false,
-    underline = true,
-    update_in_insert = false,
-    severity_sort = true,
-})
+			-- Lua
+			vim.lsp.config("lua_ls", {
+				capabilities = capabilities,
+				settings = {
+					Lua = {
+						diagnostics = {
+							globals = {
+								"vim",
+								"it",
+								"describe",
+								"before_each",
+								"after_each",
+							},
+						},
+					},
+				},
+			})
 
-            -- LSP keymaps
-            vim.api.nvim_create_autocmd("LspAttach", {
-                callback = function(event)
-                    local opts = { buffer = event.buf }
+			-- Diagnostics
+			vim.diagnostic.config({
+				virtual_text = false,
+				signs = true,
+				underline = true,
+				update_in_insert = false,
+				severity_sort = true,
 
-                    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-                    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-                    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-                    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-                    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-                end,
-            })
-        end,
-    },
+				float = {
+					focusable = false,
+					style = "minimal",
+					border = "rounded",
+					source = "always",
+					header = "",
+					prefix = "",
+				},
+			})
 
-    -- =========================================
-    -- CONFORM
-    -- =========================================
-    {
-        "stevearc/conform.nvim",
-        config = function()
-            require("conform").setup({
-                formatters_by_ft = {
-                    lua = { "stylua" },
-                   -- python = { "black" },
-                    c = { "clang-format" },
-                },
-                format_on_save = {
-                    timeout_ms = 500,
-                    lsp_fallback = true,
-                },
-            })
-        end,
-    },
+			-- Keymaps
+			vim.api.nvim_create_autocmd("LspAttach", {
+				callback = function(event)
+					local opts = { buffer = event.buf }
+
+					vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+					vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+					vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+					vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+					vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+					vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+					vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+
+					-- Diagnostics
+					vim.keymap.set("n", "<leader>dd", vim.diagnostic.open_float, opts)
+					vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+					vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+				end,
+			})
+		end,
+	},
+
+	-- =========================================
+	-- CONFORM
+	-- =========================================
+	{
+		"stevearc/conform.nvim",
+		config = function()
+			require("conform").setup({
+				notify_on_error = false,
+				formatters = {
+					["clang-format"] = {
+						args = {
+							"--style={BasedOnStyle: LLVM, PointerAlignment: Left}",
+						},
+					},
+				},
+				formatters_by_ft = {
+					lua = { "stylua" },
+					python = { "ruff_format" },
+					c = { "clang-format" },
+					cpp = { "clang-format" },
+				},
+				format_on_save = {
+					timeout_ms = 500,
+					lsp_fallback = true,
+				},
+			})
+		end,
+	},
 }

@@ -128,21 +128,21 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim" },
 
 		config = function()
-		require("harpoon"):setup()
+			require("harpoon"):setup()
 		end,
 
 		keys = {
 			{
 				"<leader>ha",
 				function()
-				require("harpoon"):list():add()
+					require("harpoon"):list():add()
 				end,
 				desc = "Harpoon add file",
 			},
 			{
 				"<leader>hc",
 				function()
-				require("harpoon"):list():clear()
+					require("harpoon"):list():clear()
 				end,
 				desc = "Harpoon clear",
 			},
@@ -150,44 +150,44 @@ return {
 			{
 				"<leader>hm",
 				function()
-				local harpoon = require("harpoon")
-				harpoon.ui:toggle_quick_menu(harpoon:list())
+					local harpoon = require("harpoon")
+					harpoon.ui:toggle_quick_menu(harpoon:list())
 				end,
 				desc = "Harpoon menu",
 			},
 
 			-- File 1
 			{
-				"<leader>h",
+				"<leader>hh",
 				function()
-				require("harpoon"):list():select(1)
+					require("harpoon"):list():select(1)
 				end,
 				desc = "Harpoon file 1",
 			},
 
 			-- File 2
 			{
-				"<leader>t",
+				"<leader>ht",
 				function()
-				require("harpoon"):list():select(2)
+					require("harpoon"):list():select(2)
 				end,
 				desc = "Harpoon file 2",
 			},
 
 			-- File 3
 			{
-				"<leader>n",
+				"<leader>hn",
 				function()
-				require("harpoon"):list():select(3)
+					require("harpoon"):list():select(3)
 				end,
 				desc = "Harpoon file 3",
 			},
 
 			-- File 4
 			{
-				"<leader>s",
+				"<leader>hs",
 				function()
-				require("harpoon"):list():select(4)
+					require("harpoon"):list():select(4)
 				end,
 				desc = "Harpoon file 4",
 			},
@@ -196,7 +196,7 @@ return {
 			{
 				"<leader>hk",
 				function()
-				require("harpoon"):list():prev()
+					require("harpoon"):list():prev()
 				end,
 				desc = "Harpoon previous",
 			},
@@ -205,37 +205,37 @@ return {
 			{
 				"<leader>hj",
 				function()
-				require("harpoon"):list():next()
+					require("harpoon"):list():next()
 				end,
 				desc = "Harpoon next",
 			},
 
 			-- Move current entry up in Harpoon list
 			{
-				"<leader>hK",
+				"<leader>hu",
 				function()
-				local list = require("harpoon"):list()
-				local idx = list.config.current_index
+					local list = require("harpoon"):list()
+					local idx = list.config.current_index
 
-				if idx and idx > 1 then
-					list:move(idx, idx - 1)
+					if idx and idx > 1 then
+						list:move(idx, idx - 1)
 					end
-					end,
-					desc = "Harpoon move entry up",
+				end,
+				desc = "Harpoon move entry up",
 			},
 
 			-- Move current entry down in Harpoon list
 			{
-				"<leader>hJ",
+				"<leader>hd",
 				function()
-				local list = require("harpoon"):list()
-				local idx = list.config.current_index
+					local list = require("harpoon"):list()
+					local idx = list.config.current_index
 
-				if idx and idx < #list.items then
-					list:move(idx, idx + 1)
+					if idx and idx < #list.items then
+						list:move(idx, idx + 1)
 					end
-					end,
-					desc = "Harpoon move entry down",
+				end,
+				desc = "Harpoon move entry down",
 			},
 		},
 	},

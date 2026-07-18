@@ -4,7 +4,7 @@ local group = vim.api.nvim_create_augroup
 local key = vim.keymap.set
 vim.g.mapleader = " "
 
--- 1. FIX: Highlight on Yank
+-- 1. Highlight on Yank
 au("TextYankPost", {
 	desc = "Highlight when yanking text",
 	group = group("highlight-yank", { clear = true }),
@@ -13,7 +13,7 @@ au("TextYankPost", {
 	end,
 })
 
--- 2. FIX: Auto-Save + Auto-Format Sync
+-- 2. Auto-Save + Auto-Format Sync
 -- This triggers when leaving Insert mode or changing text
 au({ "InsertLeave", "TextChanged" }, {
 	group = group("auto-save-format", { clear = true }),
@@ -38,13 +38,15 @@ au({ "InsertLeave", "TextChanged" }, {
 })
 
 -- Run Code
-key("n", "<leader>r", function()
+key("n", "<leader>ru", function()
 	local ft = vim.bo.filetype
 	local cmd = ""
 	if ft == "python" then
 		cmd = "python3 " .. vim.fn.expand("%")
+	elseif ft == "cpp" then
+		cmd = "g++ " .. vim.fn.expand("%") .. " -o out && ./out"
 	elseif ft == "c" then
-		cmd = "gcc " .. vim.fn.expand("%") .. " -o out && ./out"
+		cmd = "gcc -Wall -Wextra " .. vim.fn.expand("%") .. " -o out && ./out"
 	elseif ft == "sh" then
 		cmd = "bash " .. vim.fn.expand("%")
 	elseif ft == "lua" then
@@ -58,8 +60,6 @@ key("n", "<leader>r", function()
 		vim.cmd("startinsert")
 	end
 end)
-
-
 
 --------overide-------------------------
 -- 3. FIX: Persistent Line Number Colors
@@ -75,6 +75,6 @@ au("ColorScheme", {
 		hl(0, "CursorLineNr", { fg = "#ffcc66", bold = true })
 		hl(0, "Comment", { fg = "#8FA1B3", italic = true })
 		hl(0, "IblIndent", { fg = "#4f4f4f" })
-      		hl(0, "IblScope", { fg = "#ffcc66", bold = true })
+		hl(0, "IblScope", { fg = "#ffcc66", bold = true })
 	end,
 })

@@ -31,7 +31,7 @@ starship init fish | source
 fzf --fish | source
 
 # Better ls using eza
-alias ls="eza --icons"
+alias ls="eza --icons=always"
 alias ll="eza -lah --icons --group-directories-first"
 alias la="eza -a --icons"
 alias lt="eza --tree --level=2 --icons"
@@ -76,8 +76,6 @@ alias keyd='/usr/bin/keyd.rvaiya'
 
 abbr -a paru 'paru -S --needed'
 
-# neovim 
-abbr nv 'nvim $(fzf)'
 
 # Colored man pages
 set -gx LESS_TERMCAP_mb (printf "\e[1;32m")
@@ -109,5 +107,6 @@ zoxide init fish | source
 fish_add_path ~/.local/bin
 
 # Aliases
+abbr n 'nvim $(fzf)'
 alias z="sessionizer"
 alias zj="zellij"
