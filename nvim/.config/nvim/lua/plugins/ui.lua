@@ -10,7 +10,7 @@ return {
 		config = function()
 			require("ayu").setup({ mirage = false })
 			vim.cmd("colorscheme ayu-dark")
-			vim.opt.signcolumn = "no"
+			vim.opt.signcolumn = "yes"
 
 			local grp = vim.api.nvim_create_augroup("AyuFix", { clear = true })
 
