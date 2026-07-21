@@ -6,19 +6,19 @@ xkb_symbols "unreal-prog-dvorak" {
     name[Group1]= "English (UnReal Programmers Dvorak)";
 
     // Number Row Modifications
-    key <TLDE> { [      dollar,  asciitilde,        dead_grave,  dead_tilde ] };
-    key <AE01> { [        plus,      exclam                   ] };
-    key <AE02> { [   parenleft,            7                    ] };
-    key <AE03> { [   braceleft,            5                    ] };
-    key <AE04> { [ bracketleft,            3                    ] };
-    key <AE05> { [   ampersand,            1                    ] };
-    key <AE06> { [       equal,            9, dead_circumflex, dead_circumflex ] };    
-    key <AE07> { [bracketright,            0                    ] };
-    key <AE08> { [  braceright,            2                    ] };
-    key <AE09> { [  parenright,            4,   dead_grave      ] };
-    key <AE10> { [    asterisk,            6                    ] };
-    key <AE11> { [     percent,            8                    ] };
-    key <AE12> { [         bar,            grave,   dead_tilde      ] };
+    key <TLDE> { [      dollar,  asciitilde,    dead_grave,  dead_tilde ] };
+    key <AE01> { [        plus,            7                    ] };
+    key <AE02> { [   parenleft,            5                    ] };
+    key <AE03> { [   braceleft,            3                    ] };
+    key <AE04> { [ bracketleft,            1                    ] };
+    key <AE05> { [   ampersand,            9                    ] };
+    key <AE06> { [       equal,            0,   dead_circumflex, dead_circumflex ] };    
+    key <AE07> { [bracketright,            2                    ] };
+    key <AE08> { [  braceright,            4                    ] };
+    key <AE09> { [  parenright,            6,   dead_grave      ] };
+    key <AE10> { [    asterisk,            8                    ] };
+    key <AE11> { [     percent,       exclam                    ] };
+    key <AE12> { [         bar,        grave,   dead_tilde      ] };
 
     // Top Row
     key <AD01> { [   semicolon,       colon,   dead_acute, dead_diaeresis ] };

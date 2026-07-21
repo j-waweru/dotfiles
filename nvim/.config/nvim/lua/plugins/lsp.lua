@@ -1,104 +1,4 @@
 return {
-
-	-- =========================================
-	-- MASON CORE
-	-- =========================================
-	{
-		"williamboman/mason.nvim",
-		cmd = "Mason",
-		build = ":MasonUpdate",
-		opts = {
-			ui = {
-				border = "rounded",
-				icons = {
-					package_installed = "✓",
-					package_pending = "➜",
-					package_uninstalled = "✗",
-				},
-			},
-		},
-	},
-
-	-- =========================================
-	-- LSP STATUS
-	-- =========================================
-	{
-		"j-hui/fidget.nvim",
-		opts = {},
-	},
-
-	-- =========================================
-	-- TOOL INSTALLER
-	-- =========================================
-	{
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		dependencies = { "williamboman/mason.nvim" },
-		opts = {
-			ensure_installed = {
-
-				-- LSPs
-				"clangd",
-				"asm-lsp",
-				"pyright",
-				"marksman",
-				"lua-language-server",
-				"bash-language-server",
-
-				-- Web
-				"typescript-language-server",
-				"html-lsp",
-				"css-lsp",
-				"emmet-language-server",
-				"json-lsp",
-				"eslint-lsp",
-
-				-- C/C++
-				"clang-format",
-
-				-- Rust
-				"rust-analyzer",
-
-				-- Go
-				"gopls",
-				"goimports",
-				"gofumpt",
-
-				-- Python
-				"black",
-				"isort",
-				"ruff",
-				"debugpy",
-
-				-- PowerShell
-				"powershell-editor-services",
-
-				-- Bash
-				"shellcheck",
-				"shfmt",
-
-				-- Lua
-				"stylua",
-
-				-- YAML / TOML
-				"yaml-language-server",
-				"taplo",
-
-				-- Docker
-				"dockerfile-language-server",
-				"docker-compose-language-service",
-
-				-- SQL
-				"sqlfluff",
-
-				-- Misc
-				"prettierd",
-				"biome",
-			},
-			auto_update = true,
-			run_on_start = true,
-		},
-	},
-
 	-- =========================================
 	-- LSP CONFIG
 	-- =========================================
@@ -189,31 +89,15 @@ return {
 	},
 
 	-- =========================================
-	-- CONFORM
+	-- LSP STATUS
 	-- =========================================
 	{
-		"stevearc/conform.nvim",
-		config = function()
-			require("conform").setup({
-				notify_on_error = false,
-				formatters = {
-					["clang-format"] = {
-						args = {
-							"--style={BasedOnStyle: LLVM, PointerAlignment: Left}",
-						},
-					},
-				},
-				formatters_by_ft = {
-					lua = { "stylua" },
-					python = { "ruff_format" },
-					c = { "clang-format" },
-					cpp = { "clang-format" },
-				},
-				format_on_save = {
-					timeout_ms = 500,
-					lsp_fallback = true,
-				},
-			})
-		end,
+		"j-hui/fidget.nvim",
+		opts = {},
 	},
+
+	-- =========================================
+	-- CONFORM
+	-- =========================================
+
 }
