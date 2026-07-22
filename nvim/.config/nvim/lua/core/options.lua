@@ -1,5 +1,5 @@
 local opt = vim.opt
-
+opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 opt.nrformats = {}
 -- Enable spell checking
 opt.spell = false
@@ -39,7 +39,6 @@ opt.ignorecase = true
 -- Appearance and UI
 opt.termguicolors = true
 opt.wrap = false
--- opt.scrolloff = 999 -- Keeps cursor centered vertically
 opt.splitbelow = true
 opt.splitright = true
 

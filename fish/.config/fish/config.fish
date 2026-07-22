@@ -52,27 +52,27 @@ alias mkdir="mkdir -p"
 alias free="free -h"
 alias df="df -h"
 
-alias keyd='/usr/bin/keyd.rvaiya'
+abbr keyd 'sudo /usr/bin/keyd.rvaiya reload'
 
 
 # Git shortcuts
-    abbr lg 'lazygit'
-    abbr gd 'git diff'
-    abbr ga 'git add .'
-    abbr gc 'git commit -am "did stuff"'
-    abbr gl 'git log'
-    abbr gs 'git status'
-    abbr gst 'git stash'
-    abbr gsp 'git stash pop'
-    abbr gp 'git push origin main'
-    abbr gpl 'git pull'
-    abbr gsw 'git switch'
-    abbr gsm 'git switch main'
-    abbr gb 'git branch'
-    abbr gbd 'git branch -d'
-    abbr gco 'git checkout'
-    abbr gsh 'git show'
-    abbr gcl 'git clone --depth=1'
+abbr lg 'lazygit'
+abbr gd 'git diff'
+abbr ga 'git add .'
+abbr gc 'git commit -am "did stuff"'
+abbr gl 'git log'
+abbr gs 'git status'
+abbr gst 'git stash'
+abbr gsp 'git stash pop'
+abbr gp 'git push origin main'
+abbr gpl 'git pull'
+abbr gsw 'git switch'
+abbr gsm 'git switch main'
+abbr gb 'git branch'
+abbr gbd 'git branch -d'
+abbr gco 'git checkout'
+abbr gsh 'git show'
+abbr gcl 'git clone --depth=1'
 
 abbr -a paru 'paru -S --needed'
 
@@ -86,9 +86,6 @@ set -gx LESS_TERMCAP_so (printf "\e[01;33m")
 set -gx LESS_TERMCAP_ue (printf "\e[0m")
 set -gx LESS_TERMCAP_us (printf "\e[1;4;31m")
 
-
-
-
 # Other 
 
 alias ports="ss -tulpen"
@@ -98,7 +95,6 @@ alias duf="duf"
 alias top="btop"
 alias du="du -h --max-depth=1"
 alias duall="du -ah"
-
 
 # zoxide
 zoxide init fish | source
