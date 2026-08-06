@@ -1,23 +1,31 @@
 return {
-    {
-        "nvim-treesitter/nvim-treesitter",
-        -- This is CRITICAL. It runs every time the plugin updates.
-        build = ":TSUpdate",
-        install_dir = vim.fn.stdpath('data') .. '/site',
-        lazy = false, -- Force load on startup to ensure parsers are ready
-        opts = {
-            ensure_installed = {
-                "c", "lua", "vim", "vimdoc", "query",
-                "markdown", "markdown_inline", "python",
-                "bash", "asm"
-            },
-            auto_install = true,
-            highlight = { enable = true },
-            indent = { enable = true },
-        },
-        config = function(_, opts)
-            -- For nvim-treesitter 1.0.0+
-            require("nvim-treesitter").setup(opts)
-        end,
-    },
+	{
+		"nvim-treesitter/nvim-treesitter",
+		-- This is CRITICAL. It runs every time the plugin updates.
+		build = ":TSUpdate",
+		install_dir = vim.fn.stdpath("data") .. "/site",
+		lazy = false, -- Force load on startup to ensure parsers are ready
+		opts = {
+			ensure_installed = {
+				"c",
+				"lua",
+				"vim",
+				"vimdoc",
+				"query",
+				"markdown",
+				"markdown_inline",
+				"python",
+				"bash",
+				"asm",
+				"rust",
+			},
+			auto_install = true,
+			highlight = { enable = true },
+			indent = { enable = true },
+		},
+		config = function(_, opts)
+			-- For nvim-treesitter 1.0.0+
+			require("nvim-treesitter").setup(opts)
+		end,
+	},
 }

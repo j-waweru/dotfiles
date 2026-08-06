@@ -28,3 +28,14 @@ require("lazy").setup({
 	-- Optional: This handles the "re-sourcing" automatically
 	checker = { enabled = true },
 })
+
+vim.opt.runtimepath:append("/home/waweru/.local/share/nvim/site/")
+
+--- Normal Visual Mode
+vim.api.nvim_set_hl(0, "Visual", { bg = "#3e4452", fg = "#61afef" })
+
+-- Visual Line Mode (Shift+V)
+vim.api.nvim_set_hl(0, "VisualNOS", { bg = "#4b5263", fg = "#98c379" })
+
+-- Visual Block Mode (Ctrl+V)
+vim.api.nvim_set_hl(0, "VisualBlock", { bg = "#c678dd", fg = "#282c34" })

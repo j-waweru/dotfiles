@@ -1,25 +1,48 @@
 layout {
-    pane size=1 borderless=true {
-        plugin location="zellij:tab-bar"
-    }
-
-    pane split_direction="vertical" {
-
-        // TOP: Neovim
-        pane size="70%" {
-            command "nvim"
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
         }
-
-        // BOTTOM: two panes
-        pane split_direction="horizontal" {
-
-            pane { }
-
-            pane { }
+        children
+        pane size=1 borderless=true {
+            plugin location="zellij:status-bar"
         }
     }
 
-    pane size=1 borderless=true {
-        plugin location="zellij:status-bar"
+    tab name="1" {
+        pane split_direction="vertical" {
+            // TOP: Neovim
+            pane size="70%" {
+                command "nvim"
+            }
+
+            // BOTTOM: two panes
+            pane split_direction="horizontal" {
+                pane { }
+                pane { }
+            }
+        }
+    }
+
+    tab name="2" {
+        pane { }
+    }
+
+    tab name="3" {
+        pane split_direction="vertical" {
+            pane { }
+            pane { }
+        }
+    }
+
+    tab name="4" {
+        pane { }
+    }
+
+    tab name="5" {
+        pane split_direction="vertical" {
+            pane { }
+            pane { }
+        }
     }
 }

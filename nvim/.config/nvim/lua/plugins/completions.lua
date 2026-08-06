@@ -1,88 +1,85 @@
 return {
 	-- COMPLETION & EDITING TOOLS
 	{
-		"hrsh7th/nvim-cmp",
+		"saghen/blink.cmp",
+		version = "*",
 		dependencies = {
-			"L3MON4D3/LuaSnip",
-			"saadparwaiz1/cmp_luasnip",
 			"rafamadriz/friendly-snippets",
+			"L3MON4D3/LuaSnip",
 			"windwp/nvim-autopairs",
-
-			-- Additional completion sources
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-cmdline",
 		},
 
-		config = function()
-			local cmp = require("cmp")
-			local luasnip = require("luasnip")
+		opts = {
+			keymap = {
+				preset = "default",
+				["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+				["<C-e>"] = { "hide" },
+				["<CR>"] = { "accept", "fallback" },
+				["<C-y>"] = { "accept" },
+				["<C-n>"] = { "select_next", "fallback" },
+				["<C-p>"] = { "select_prev", "fallback" },
+				["<C-d>"] = { "scroll_documentation_down", "fallback" },
+				["<C-f>"] = { "scroll_documentation_up", "fallback" },
+			},
 
-			-- Load VSCode snippets
-			require("luasnip.loaders.from_vscode").lazy_load()
+			appearance = {
+				use_nvim_cmp_as_default = true,
+				nerd_font_variant = "mono",
+			},
 
-			cmp.setup({
-				snippet = {
-					expand = function(args)
-						luasnip.lsp_expand(args.body)
-					end,
+			sources = {
+				default = { "lsp", "path", "snippets", "buffer" },
+				-- Explicitly register command-line providers for cmdline mode integration
+				providers = {
+					cmdline = {
+						name = "cmdline",
+						module = "blink.cmp.sources.cmdline",
+					},
 				},
-				window = { completion = cmp.config.window.bordered(), documentation = cmp.config.window.bordered() },
+			},
 
-				mapping = {
-					-- Trigger completion menu
-					["<C-Space>"] = cmp.mapping.complete(),
+			snippets = { preset = "luasnip" },
 
-					-- Next item
-					["<C-n>"] = cmp.mapping.select_next_item(),
-
-					-- Previous item
-					["<C-p>"] = cmp.mapping.select_prev_item(),
-
-					-- Accept selection
-					["<C-y>"] = cmp.mapping.confirm({ select = true }),
-					["<CR>"] = cmp.mapping.confirm({ select = true }),
-
-					-- Close menu
-					["<C-e>"] = cmp.mapping.abort(),
-
-					-- Snippet jumping
-					["<C-l>"] = cmp.mapping(function(fallback)
-						if luasnip.expand_or_locally_jumpable() then
-							luasnip.expand_or_jump()
-						else
-							fallback()
+			-- Explicit native command-line configuration mapped for Noice compatibility
+			cmdline = {
+				enabled = true,
+				keymap = { preset = "cmdline" },
+				sources = function()
+				local type = vim.fn.getcmdtype()
+				if type == "/" or type == "?" then
+					return { "buffer" }
+					end
+					if type == ":" then
+						return { "cmdline", "path" }
 						end
-					end, { "i", "s" }),
+						return {}
+						end,
+						completion = {
+							menu = {
+								auto_show = true,
+							},
+						},
+			},
 
-					["<C-h>"] = cmp.mapping(function(fallback)
-						if luasnip.locally_jumpable(-1) then
-							luasnip.jump(-1)
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
+			-- Window sizing constraints for the main editor completion
+			completion = {
+				menu = {
+					border = "rounded",
+					max_height = 12,
+					draw = {
+						columns = { { "kind_icon", "label", "label_description", gap = 1 } },
+					},
 				},
-
-				sources = cmp.config.sources({
-					{ name = "nvim_lsp" },
-					{ name = "luasnip" },
-				}, {
-					{ name = "buffer" },
-					{ name = "path" },
-				}),
-			})
-
-			-- Enable completion in ':' command line
-			cmp.setup.cmdline(":", {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = cmp.config.sources({
-					{ name = "path" },
-				}, {
-					{ name = "cmdline" },
-				}),
-			})
-		end,
+				documentation = {
+					window = {
+						border = "rounded",
+						max_width = 50,
+						max_height = 15,
+					},
+				},
+			},
+		},
+		opts_extend = { "sources.default" },
 	},
 
 	{ "windwp/nvim-autopairs", config = true },
@@ -94,20 +91,20 @@ return {
 		"abecodes/tabout.nvim",
 		lazy = false,
 		config = function()
-			require("tabout").setup({
-				tabkey = "<Tab>",
-				backwards_tabkey = "<S-Tab>",
-				act_as_tab = true,
-				completion = false,
-				tabouts = {
-					{ open = "'", close = "'" },
-					{ open = '"', close = '"' },
-					{ open = "`", close = "`" },
-					{ open = "(", close = ")" },
-					{ open = "[", close = "]" },
-					{ open = "{", close = "}" },
-				},
-			})
+		require("tabout").setup({
+			tabkey = "<Tab>",
+			backwards_tabkey = "<S-Tab>",
+			act_as_tab = true,
+			completion = false,
+			tabouts = {
+				{ open = "'", close = "'" },
+				{ open = '"', close = '"' },
+				{ open = "`", close = "`" },
+				{ open = "(", close = ")" },
+								{ open = "[", close = "]" },
+								{ open = "{", close = "}" },
+			},
+		})
 		end,
 		priority = 1000,
 	},
@@ -115,6 +112,9 @@ return {
 	{
 		"L3MON4D3/LuaSnip",
 		build = "make install_jsregexp",
+		config = function()
+		require("luasnip.loaders.from_vscode").lazy_load()
+		end,
 	},
 
 	{ "numToStr/Comment.nvim", config = true },

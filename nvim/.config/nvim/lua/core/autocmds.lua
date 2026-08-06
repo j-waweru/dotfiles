@@ -49,6 +49,8 @@ key("n", "<leader>ru", function()
 		cmd = "gcc -Wall -Wextra " .. vim.fn.expand("%") .. " -o out && ./out"
 	elseif ft == "sh" then
 		cmd = "bash " .. vim.fn.expand("%")
+	elseif ft == "rust" then
+		cmd = "cargo run"
 	elseif ft == "lua" then
 		vim.cmd("source %")
 		return

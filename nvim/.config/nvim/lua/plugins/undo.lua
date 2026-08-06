@@ -36,12 +36,6 @@ return {
 					time_format = "",
 					saved_only = false,
 
-					-- Better layout for side-by-side diffs
-					layout_strategy = "vertical",
-					layout_config = {
-						preview_height = 0.8,
-					},
-
 					-- Keymaps inside Telescope Undo
 					mappings = {
 						i = {
