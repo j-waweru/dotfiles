@@ -1,10 +1,7 @@
 
 # ⌨️ Custom Keyboard layout config — Installation Guide
 
-Includes two keyboard layouts for a custom qwerty and dvorak layout in the xkb dir.
-
 Inspired by the primeagen's layout.
-
 
 ### Base layer 
 ![Programmers dvorak](./base.png)

@@ -39,3 +39,13 @@ vim.api.nvim_set_hl(0, "VisualNOS", { bg = "#4b5263", fg = "#98c379" })
 
 -- Visual Block Mode (Ctrl+V)
 vim.api.nvim_set_hl(0, "VisualBlock", { bg = "#c678dd", fg = "#282c34" })
+
+-- Brighten up unselected completion labels
+vim.api.nvim_set_hl(0, "BlinkCmpLabel", { fg = "#c0c0c0", bold = false })
+
+-- Optional: Ensure the matched characters stand out even more
+-- Brighten or customize the background/text color of the active selection bar
+
+vim.api.nvim_set_hl(0, "BlinkCmpLabelMatch", { fg = "#33ccff", bold = true })
+
+vim.api.nvim_set_hl(0, "BlinkCmpMenuSelection", { bg = "#2d3748", fg = "#ffffff", bold = true })

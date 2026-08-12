@@ -25,7 +25,7 @@ keybinds {
         bind "Alt *" { GoToTab 4; }
 
         // Open the interactive session manager plugin instead of SwitchSession
-        bind "Ctrl PageDown" {
+        bind "PageDown" {
             LaunchOrFocusPlugin "zellij:session-manager" {
                 floating true
                 move_to_focused_tab true

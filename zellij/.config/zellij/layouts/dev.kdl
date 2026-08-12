@@ -10,33 +10,31 @@ layout {
     }
 
     tab name="1" {
-        pane split_direction="vertical" {
-            // TOP: Neovim
-            pane size="70%" {
-                command "nvim"
-            }
+        pane { }
+    }
 
-            // BOTTOM: two panes
+    tab name="2" {
+        pane split_direction="vertical" {
+            pane { }
+            pane { }
+        }
+    }
+
+    tab name="3" {
+        pane { }
+    }
+
+    tab name="4" {
+        pane split_direction="vertical" {
+            pane split_direction="horizontal" {
+                pane { }
+                pane { }
+            }
             pane split_direction="horizontal" {
                 pane { }
                 pane { }
             }
         }
-    }
-
-    tab name="2" {
-        pane { }
-    }
-
-    tab name="3" {
-        pane split_direction="vertical" {
-            pane { }
-            pane { }
-        }
-    }
-
-    tab name="4" {
-        pane { }
     }
 
     tab name="5" {

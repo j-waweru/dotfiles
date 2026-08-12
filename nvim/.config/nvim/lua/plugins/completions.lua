@@ -15,9 +15,9 @@ return {
 				["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
 				["<C-e>"] = { "hide" },
 				["<CR>"] = { "accept", "fallback" },
-				["<C-y>"] = { "accept" },
+				["<C-h>"] = { "accept" },
 				["<C-n>"] = { "select_next", "fallback" },
-				["<C-p>"] = { "select_prev", "fallback" },
+				["<C-t>"] = { "select_prev", "fallback" },
 				["<C-d>"] = { "scroll_documentation_down", "fallback" },
 				["<C-f>"] = { "scroll_documentation_up", "fallback" },
 			},
@@ -45,20 +45,20 @@ return {
 				enabled = true,
 				keymap = { preset = "cmdline" },
 				sources = function()
-				local type = vim.fn.getcmdtype()
-				if type == "/" or type == "?" then
-					return { "buffer" }
+					local type = vim.fn.getcmdtype()
+					if type == "/" or type == "?" then
+						return { "buffer" }
 					end
 					if type == ":" then
 						return { "cmdline", "path" }
-						end
-						return {}
-						end,
-						completion = {
-							menu = {
-								auto_show = true,
-							},
-						},
+					end
+					return {}
+				end,
+				completion = {
+					menu = {
+						auto_show = true,
+					},
+				},
 			},
 
 			-- Window sizing constraints for the main editor completion
@@ -91,20 +91,20 @@ return {
 		"abecodes/tabout.nvim",
 		lazy = false,
 		config = function()
-		require("tabout").setup({
-			tabkey = "<Tab>",
-			backwards_tabkey = "<S-Tab>",
-			act_as_tab = true,
-			completion = false,
-			tabouts = {
-				{ open = "'", close = "'" },
-				{ open = '"', close = '"' },
-				{ open = "`", close = "`" },
-				{ open = "(", close = ")" },
-								{ open = "[", close = "]" },
-								{ open = "{", close = "}" },
-			},
-		})
+			require("tabout").setup({
+				tabkey = "<Tab>",
+				backwards_tabkey = "<S-Tab>",
+				act_as_tab = true,
+				completion = false,
+				tabouts = {
+					{ open = "'", close = "'" },
+					{ open = '"', close = '"' },
+					{ open = "`", close = "`" },
+					{ open = "(", close = ")" },
+					{ open = "[", close = "]" },
+					{ open = "{", close = "}" },
+				},
+			})
 		end,
 		priority = 1000,
 	},
@@ -113,7 +113,7 @@ return {
 		"L3MON4D3/LuaSnip",
 		build = "make install_jsregexp",
 		config = function()
-		require("luasnip.loaders.from_vscode").lazy_load()
+			require("luasnip.loaders.from_vscode").lazy_load()
 		end,
 	},
 

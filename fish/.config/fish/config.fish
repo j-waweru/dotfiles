@@ -2,7 +2,9 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 fish_add_path $HOME/.cargo/binf
-
+fish_add_path /opt/gradle-8.14.3/bin
+set -x JAVA_HOME /usr/lib/jvm/java-21-openjdk-amd64
+fish_add_path $JAVA_HOME/bin
 # Created by `pipx` on 2026-05-19 06:43:08
 set PATH $PATH /home/waweru/.local/bin
 
@@ -51,6 +53,8 @@ alias rm="rm -i"
 alias mkdir="mkdir -p"
 alias free="free -h"
 alias df="df -h"
+
+abbr gh "/opt/ghidra_12.1.2_PUBLIC/./ghidraRun"
 
 abbr keyd 'sudo /usr/bin/keyd.rvaiya reload'
 
