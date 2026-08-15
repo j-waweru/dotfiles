@@ -14,14 +14,14 @@ layout {
     }
 
     tab name="2" {
+            pane { }
+    }
+
+    tab name="3" {
         pane split_direction="vertical" {
             pane { }
             pane { }
         }
-    }
-
-    tab name="3" {
-        pane { }
     }
 
     tab name="4" {

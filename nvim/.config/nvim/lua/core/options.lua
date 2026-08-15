@@ -13,6 +13,7 @@ opt.foldenable = true
 
 -- CUSTOM INDICATORS
 -- This replaces the numbers with icons and removes the 'eob' (End of Buffer) tildes
+--
 opt.fillchars = {
 	foldopen = "", -- Chevron Down
 	foldclose = "", -- Chevron Right
@@ -20,9 +21,6 @@ opt.fillchars = {
 	foldsep = " ", -- Removes the vertical separator in folds
 	eob = " ", -- Removes the ~ at the end of the file
 } -- Enable folding
-
--- Ibeam cursor
---opt.guicursor = "a:ver25"
 
 -- Line numbers
 opt.number = true
@@ -46,8 +44,10 @@ opt.splitright = true
 -- Ensure you have 'wl-clipboard' installed (for Wayland) or 'xclip' (for X11)
 opt.clipboard = "unnamedplus"
 
-opt.redrawtime = 10000 -- Increase the timeout to 10 seconds
+opt.redrawtime = 20000 -- Increase the timeout to 10 seconds
 opt.re = 0 -- Use the automatic/modern regex engine
 
 opt.undofile = true
 opt.undodir = vim.fn.expand("~/.config/nvim/undo_dir")
+
+vim.lsp.buf.format({ timeout_ms = 5000 })
