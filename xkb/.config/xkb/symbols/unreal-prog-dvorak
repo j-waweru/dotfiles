@@ -6,25 +6,25 @@ xkb_symbols "unreal-prog-dvorak" {
     name[Group1]= "English (UnReal Programmers Dvorak)";
 
     // Number Row
-    key <TLDE> { [  asciitilde,       grave,   dead_grave,     dead_tilde ] };
-    key <AE01> { [        plus,            7                    ] };
+    key <TLDE> { [  asciitilde,        grave,                   dead_grave,      dead_tilde       ] };// normal  
+    key <AE01> { [   backslash,            7                    ] };// left over
     key <AE02> { [   parenleft,            5                    ] };
     key <AE03> { [   braceleft,            3                    ] };
     key <AE04> { [ bracketleft,            1                    ] };
-    key <AE05> { [   ampersand,            9                    ] };
-    key <AE06> { [       equal,            0,  dead_circumflex, dead_circumflex ] };
+    key <AE05> { [      exclam,            9                    ] };
+    key <AE06> { [       equal,            0,                   dead_circumflex, dead_circumflex  ] };
     key <AE07> { [bracketright,            2                    ] };
     key <AE08> { [  braceright,            4                    ] };
-    key <AE09> { [  parenright,            6,  dead_grave       ] };
-    key <AE10> { [    asterisk,            8                    ] };
-    key <AE11> { [     percent,       exclam                    ] };
-    key <AE12> { [   backslash,          bar,  dead_tilde       ] };
+    key <AE09> { [  parenright,            6,                   dead_grave                         ] };
+    key <AE10> { [     percent,            8                    ] };
+    key <AE11> { [        plus,     asterisk,                   dead_tilde                         ] };// math
+    key <AE12> { [   ampersand,          bar                    ] };//  and or
 
 
     // Top Row
-    key <AD01> { [   semicolon,       colon,   dead_acute,      dead_diaeresis ] };
-    key <AD02> { [       comma,        less,   dead_cedilla,    dead_caron ] };
-    key <AD03> { [      period,     greater,   dead_abovedot,   periodcentered ] };
+    key <AD01> { [   semicolon,        colon,                   dead_acute,       dead_diaeresis   ] };
+    key <AD02> { [       comma,         less,                   dead_cedilla,     dead_caron       ] };
+    key <AD03> { [      period,      greater,                   dead_abovedot,    periodcentered   ] };
     key <AD04> { [           p,            P                    ] };
     key <AD05> { [           y,            Y                    ] };
     key <AD06> { [           f,            F                    ] }; 
@@ -32,8 +32,8 @@ xkb_symbols "unreal-prog-dvorak" {
     key <AD08> { [           c,            C                    ] };
     key <AD09> { [           r,            R                    ] };
     key <AD10> { [           l,            L                    ] };
-    key <AD11> { [       slash,   numbersign                    ] };
-    key <AD12> { [ asciicircum,       dollar                    ] };
+    key <AD11> { [       slash,   numbersign                    ] };// comments 
+    key <AD12> { [ asciicircum,       dollar                    ] };// regex 
 
     // Home Row
     key <AC01> { [           a,            A                    ] };
@@ -46,10 +46,10 @@ xkb_symbols "unreal-prog-dvorak" {
     key <AC08> { [           t,            T                    ] };
     key <AC09> { [           n,            N                    ] };
     key <AC10> { [           s,            S                    ] };
-    key <AC11> { [       minus,   underscore                    ] };
+    key <AC11> { [       minus,   underscore                    ] };// normal 
 
     // Bottom Row & Extras
-    key <AB01> { [    quotedbl,   apostrophe,  dead_ogonek,     dead_doubleacute ] };
+    key <AB01> { [    quotedbl,   apostrophe,                   dead_ogonek,      dead_doubleacute    ] };// normal
     key <AB02> { [           q,            Q                    ] };
     key <AB03> { [           j,            J                    ] };
     key <AB04> { [           k,            K                    ] };
@@ -60,6 +60,6 @@ xkb_symbols "unreal-prog-dvorak" {
     key <AB09> { [           v,            V                    ] };
     key <AB10> { [           z,            Z                    ] };
     
-    key <BKSL> { [    question,           at                    ] };
+    key <BKSL> { [    question,           at                    ] }; // left over
 };
 

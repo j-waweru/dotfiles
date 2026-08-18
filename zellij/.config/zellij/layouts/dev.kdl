@@ -10,7 +10,10 @@ layout {
     }
 
     tab name="1" {
-        pane { }
+          pane command="nvim" {
+            args "." // Optional: tells nvim to open the current directory
+            focus true
+        }
     }
 
     tab name="2" {
