@@ -13,5 +13,16 @@
       </configItem>
       <variantList/>
     </layout>
+    <layout>
+      <configItem>
+        <name>typing-dvorak</name>
+        <shortDescription>tpd</shortDescription>
+        <description>English (Typing Dvorak)</description>
+        <languageList>
+          <iso639Id>eng</iso639Id>
+        </languageList>
+      </configItem>
+      <variantList/>
+    </layout>
   </layoutList>
 </xkbConfigRegistry>
