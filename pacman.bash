@@ -1,6 +1,3 @@
-Script rebuilt for Arch/CachyOS. Pacman native dependencies swapped. Neovim native extra repository package used instead of source build. Google Chrome installation handled via Paru AUR helper. Keyboard layout configuration targets Hyprland input blocks inside `~/.config/hypr/hyprland.conf`.
-
-```bash
 #!/usr/bin/env bash
 set -euo pipefail
 
@@ -121,5 +118,3 @@ else
 fi
 
 echo "[!] SUCCESS: Configuration complete. Restart Hyprland session to apply all environment rules."
-
-```

@@ -1,4 +1,3 @@
-```bash
 #!/usr/bin/env bash
 set -euo pipefail
 
@@ -109,7 +108,7 @@ if [[ "$DE" == *"KDE"* ]]; then
     /usr/bin/qdbus6 org.kde.keyboard /Layouts reconfigure || true
 else
     echo "    Applying configurations for GNOME/XFCE..."
-    /usr/bin/gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('xkb', 'real-prog-dvorak')]"
+    /usr/bin/gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('xkb', 'unreal-prog-dvorak')]"
     /usr/bin/gsettings set org.gnome.desktop.input-sources xkb-options "['caps:swapescape']"
 fi
 
@@ -129,5 +128,3 @@ else
 fi
 
 echo "[!] SUCCESS: Configuration complete. Restart session to cycle terminal shell environments."
-
-```
