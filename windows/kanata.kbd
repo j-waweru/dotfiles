@@ -1,0 +1,397 @@
+(defcfg
+  process-unmapped-keys yes
+)
+
+;; ============================================================
+;; PHYSICAL US QWERTY KEYBOARD
+;; ============================================================
+
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+
+;; ============================================================
+;; FAKE KEYS
+;;
+;; shiftlock is a virtual key whose action is to hold the
+;; Shift layer while the fake key itself is pressed.
+;;
+;; We toggle the fake key on/off with Left Shift.
+;; ============================================================
+
+(deffakekeys
+  shiftlock (layer-while-held shift)
+)
+
+
+;; ============================================================
+;; ALIASES
+;; ============================================================
+
+(defalias
+
+  ;; ----------------------------------------------------------
+  ;; Number-row symbols
+  ;; ----------------------------------------------------------
+
+  tilde     S-grv
+  lparen    S-9
+  lbrace    S-[
+  bang      S-1
+  rbrace    S-]
+  rparen    S-0
+  percent   S-5
+  plus      S-=
+  asterisk  S-8
+  ampersand S-7
+  bar       S-\
+
+
+  ;; ----------------------------------------------------------
+  ;; Punctuation symbols
+  ;; ----------------------------------------------------------
+
+  colon     S-;
+  less      S-,
+  greater   S-.
+  hash      S-3
+  dollar    S-4
+  caret     S-6
+  at        S-2
+
+
+  ;; ----------------------------------------------------------
+  ;; Caps Lock
+  ;;
+  ;; Tap  = Escape
+  ;; Hold = Left Control
+  ;; ----------------------------------------------------------
+
+  capsctl
+    (tap-hold 200 200 esc lctl)
+
+
+  ;; ----------------------------------------------------------
+  ;; Left Alt
+  ;;
+  ;; Tap  = Backspace
+  ;; Hold = Left Alt
+  ;; ----------------------------------------------------------
+
+  altbs
+    (tap-hold 200 200 bspc lalt)
+
+
+  ;; ----------------------------------------------------------
+  ;; Right Alt
+  ;;
+  ;; Tap  = Enter
+  ;; Hold = Right Alt
+  ;; ----------------------------------------------------------
+
+  altgrENT
+    (tap-hold 200 200 ret ralt)
+
+
+  ;; ----------------------------------------------------------
+  ;; Space
+  ;;
+  ;; Tap  = Space
+  ;; Hold = temporary Shift layer
+  ;; ----------------------------------------------------------
+
+  spcsft
+    (tap-hold 200 200 spc (layer-while-held shift))
+
+
+  ;; ----------------------------------------------------------
+  ;; Dvorak A
+  ;;
+  ;; Physical key = QWERTY A
+  ;;
+  ;; Tap  = a
+  ;; Hold = Navigation
+  ;;
+  ;; 400 ms timeout gives more time to type a normally without
+  ;; accidentally entering Navigation.
+  ;;
+  ;; tap-hold-press still activates Navigation immediately
+  ;; when another key is pressed while A is held.
+  ;; ----------------------------------------------------------
+
+  anav
+    (tap-hold 400 400 a (layer-while-held nav))
+
+
+  ;; ----------------------------------------------------------
+  ;; Dvorak A on Shift layer
+  ;;
+  ;; Tap  = A
+  ;; Hold = Navigation
+  ;; ----------------------------------------------------------
+
+  anavS
+    (tap-hold 400 400 S-a (layer-while-held nav))
+
+
+  ;; ----------------------------------------------------------
+  ;; Dvorak S
+  ;;
+  ;; Physical key = QWERTY ;
+  ;;
+  ;; Tap  = s
+  ;; Hold = Navigation
+  ;;
+  ;; 400 ms timeout gives more time to type a normal S.
+  ;; ----------------------------------------------------------
+
+  snav
+    (tap-hold 400 400 s (layer-while-held nav))
+
+
+  ;; ----------------------------------------------------------
+  ;; Dvorak S on Shift layer
+  ;;
+  ;; Tap  = S
+  ;; Hold = Navigation
+  ;; ----------------------------------------------------------
+
+  snavS
+    (tap-hold 400 400 S-s (layer-while-held nav))
+
+
+  ;; ----------------------------------------------------------
+  ;; Dvorak "-"
+  ;;
+  ;; Physical key = QWERTY apostrophe
+  ;;
+  ;; Tap  = -
+  ;; Hold = Left Control
+  ;; ----------------------------------------------------------
+
+  minusctl
+    (tap-hold-press 200 200 - lctl)
+
+
+  ;; ----------------------------------------------------------
+  ;; Dvorak "_" on Shift layer
+  ;;
+  ;; Tap  = _
+  ;; Hold = Left Control
+  ;; ----------------------------------------------------------
+
+  minusctlS
+    (tap-hold-press 200 200 S-- lctl)
+
+
+  ;; ----------------------------------------------------------
+  ;; Enter
+  ;;
+  ;; Tap  = Enter
+  ;; Hold = Windows key
+  ;; ----------------------------------------------------------
+
+  entwin
+    (tap-hold-press 200 200 ret lmet)
+
+
+  ;; ----------------------------------------------------------
+  ;; Persistent Shift-layer toggle
+  ;;
+  ;; Tap Left Shift:
+  ;;
+  ;;   Base  -> Shift
+  ;;
+  ;; Tap Left Shift again:
+  ;;
+  ;;   Shift -> Base
+  ;;
+  ;; The fake key stays pressed until the next toggle.
+  ;; ----------------------------------------------------------
+
+  shifttog
+    (on-press-fakekey shiftlock toggle)
+)
+
+
+;; ============================================================
+;; BASE LAYER
+;;
+;; Exactly 60 entries.
+;; ============================================================
+
+(deflayer base
+
+  ;; ----------------------------------------------------------
+  ;; Number row
+  ;; ----------------------------------------------------------
+
+  @tilde  \  @lparen  @lbrace  [  =  @bang  ]  @rbrace  @rparen  @percent  @plus  @ampersand  bspc
+
+
+  ;; ----------------------------------------------------------
+  ;; Top row
+  ;; ----------------------------------------------------------
+
+  tab  ;  ,  .  p  y  f  g  c  r  l  /  @caret  S-/
+
+
+  ;; ----------------------------------------------------------
+  ;; Home row
+  ;;
+  ;; Physical:
+  ;; A  S  D  F  G  H  J  K  L  ;  '
+  ;;
+  ;; Dvorak:
+  ;; a  o  e  u  i  d  h  t  n  s  -
+  ;; ----------------------------------------------------------
+
+  @capsctl  @anav  o  e  u  i  d  h  t  n  @snav  @minusctl  @entwin
+
+
+  ;; ----------------------------------------------------------
+  ;; Bottom row
+  ;; ----------------------------------------------------------
+
+  @shifttog  S-'  q  j  k  x  b  m  w  v  z  rsft
+
+
+  ;; ----------------------------------------------------------
+  ;; Modifier / thumb row
+  ;; ----------------------------------------------------------
+
+  lctl  lmet  @altbs  @spcsft  @altgrENT  rmet  rctl
+)
+
+
+;; ============================================================
+;; SHIFT LAYER
+;;
+;; Persistent:
+;;   Left Shift tap -> enter
+;;   Left Shift tap -> leave
+;;
+;; Temporary:
+;;   Hold Space -> enter
+;;   Release Space -> leave
+;; ============================================================
+
+(deflayer shift
+
+  ;; ----------------------------------------------------------
+  ;; Number row
+  ;; ----------------------------------------------------------
+
+  grv  7  5  3  1  9  0  2  4  6  8  @asterisk  @bar  bspc
+
+
+  ;; ----------------------------------------------------------
+  ;; Top row
+  ;; ----------------------------------------------------------
+
+  tab  @colon  @less  @greater  S-p  S-y  S-f  S-g  S-c  S-r  S-l  @hash  @dollar  @at
+
+
+  ;; ----------------------------------------------------------
+  ;; Home row
+  ;; ----------------------------------------------------------
+
+  @capsctl  @anavS  S-o  S-e  S-u  S-i  S-d  S-h  S-t  S-n  @snavS  @minusctlS  @entwin
+
+
+  ;; ----------------------------------------------------------
+  ;; Bottom row
+  ;; ----------------------------------------------------------
+
+  @shifttog  '  S-q  S-j  S-k  S-x  S-b  S-m  S-w  S-v  S-z  rsft
+
+
+  ;; ----------------------------------------------------------
+  ;; Modifier / thumb row
+  ;; ----------------------------------------------------------
+
+  lctl  lmet  @altbs  @spcsft  @altgrENT  rmet  rctl
+)
+
+
+;; ============================================================
+;; NAVIGATION LAYER
+;;
+;; Activated while holding either:
+;;
+;;   Dvorak A = physical QWERTY A
+;;   Dvorak S = physical QWERTY ;
+;;
+;; Release the activating key and navigation disappears.
+;;
+;; ============================================================
+;;
+;; Dvorak navigation:
+;;
+;;                 K
+;;                 ↑
+;;
+;;           H     J     L
+;;           ←     ↓     →
+;;
+;; Physical QWERTY positions:
+;;
+;;                 V
+;;                 ↑
+;;
+;;           J     C     P
+;;           ←     ↓     →
+;;
+;; Everything else is transparent.
+;;
+;; Exactly 60 entries.
+;; ============================================================
+
+(deflayer nav
+
+  ;; ----------------------------------------------------------
+  ;; Number row
+  ;; ----------------------------------------------------------
+
+  _  _  _  _  _  _  _  _  _  _  _  _  _  _
+
+
+  ;; ----------------------------------------------------------
+  ;; Top row
+  ;;
+  ;; Physical P = Dvorak L = RIGHT
+  ;; ----------------------------------------------------------
+
+  _  _  _  _  _  _  _  _  _  _  right  _  _  _
+
+
+  ;; ----------------------------------------------------------
+  ;; Home row
+  ;;
+  ;; Physical J = Dvorak H = LEFT
+  ;; ----------------------------------------------------------
+
+  _  _  _  _  _  _  _  left  _  _  _  _  _
+
+
+  ;; ----------------------------------------------------------
+  ;; Bottom row
+  ;;
+  ;; Physical C = Dvorak J = DOWN
+  ;; Physical V = Dvorak K = UP
+  ;; ----------------------------------------------------------
+
+  _  _  _  down  up  _  _  _  _  _  _  _
+
+
+  ;; ----------------------------------------------------------
+  ;; Modifier / thumb row
+  ;; ----------------------------------------------------------
+
+  _  _  _  _  _  _  _
+)
