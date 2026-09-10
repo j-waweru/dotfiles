@@ -61,11 +61,26 @@
   )
 
   ;; ============================================================
+  ;; SHIFT-LAYER SPECIAL KEYS
+  ;; ============================================================
+
+  ;; Left Alt: tap = Backspace, hold = Left Alt
+  ;; Temporarily leave persistent Shift layer while Alt is held
+  shift-altbs (tap-hold 200 200 bspc
+    (multi lalt (layer-while-held base))
+  )
+
+  ;; Right Alt: tap = Enter, hold = Right Alt
+  ;; Temporarily leave persistent Shift layer while AltGr is held
+  shift-altgrENT (tap-hold 200 200 ret
+    (multi ralt (layer-while-held base))
+  )
+
+  ;; ============================================================
   ;; SHIFT-LAYER NAVIGATION
   ;; ============================================================
 
   ;; A: tap = Shift+A, hold = Nav
-  ;; Nav temporarily takes precedence over persistent Shift
   shiftnav-a (tap-hold 400 400 S-a
     (layer-while-held nav)
   )
@@ -77,7 +92,6 @@
   shiftnav-d (tap-hold 300 300 S-d end)
 
   ;; ;: tap = Shift+;, hold = Nav
-  ;; Nav temporarily takes precedence over persistent Shift
   shiftnav-semicolon (tap-hold 400 400 S-;
     (layer-while-held nav)
   )
@@ -123,5 +137,5 @@
 
   lsft S-z S-x S-c S-v S-b S-n S-m S-, S-. S-/ @shiftoff
 
-  S-lctl S-lmet bspc @spcshift ret S-rmet S-rctl
+  S-lctl S-lmet @shift-altbs @spcshift @shift-altgrENT S-rmet S-rctl
 )
