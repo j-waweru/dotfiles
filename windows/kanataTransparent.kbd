@@ -133,7 +133,7 @@
 
   S-tab S-q S-w S-e S-r S-t S-y S-u S-i S-o S-p S-[ S-] S-\
 
-  @capsctl @shiftnav-a @shiftnav-s @shiftnav-d S-f S-g S-h S-j S-k S-l @shiftnav-semicolon @quotectl S-ret
+  @capsctl @shiftnav-a @shiftnav-s @shiftnav-d S-f S-g S-h S-j S-k S-l @shiftnav-semicolon S-' S-ret
 
   lsft S-z S-x S-c S-v S-b S-n S-m S-, S-. S-/ @shiftoff
 
