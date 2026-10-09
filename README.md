@@ -7,32 +7,15 @@ This repository contains configuration files for:
 - Kitty
 - Neovim
 - Fish shell and starship
-- xkb and keyd 
+- xkb and kanata 
 - Zellij
+- Windows
 
 The setup uses symbolic links managed by GNU Stow to keep configs organized, portable, and version controlled.
 
 ---
 
 # Repository Structure
-
-```text
-~/dotfiles/
-├── kitty/
-│   └── .config/kitty/
-├── nvim/
-│   └── .config/nvim/
-└── fish/
-|   └── .config/fish/
-└── starship/
-|   └── .config/starship.toml/
-└── xkb/
-|    ├── README.md  
-|    └── .config/xkb/
-└── keyd/
-    └── etc/keyd/default.conf
-
-```
 
 Each top-level directory is a Stow package.
 
@@ -96,30 +79,6 @@ stow */
 
 ---
 
-# Usage
-
-## Add New Configurations
-
-Create a new package:
-
-```bash
-mkdir -p tmux/.config/tmux
-```
-
-Move your existing config into the repository:
-
-```bash
-mv ~/.config/tmux/tmux.conf tmux/.config/tmux/
-```
-
-Stow it:
-
-```bash
-stow tmux
-```
-
----
-
 # Useful Stow Commands
 
 ## Stow a package
@@ -147,25 +106,3 @@ stow -R */
 ```
 
 ---
-
-# Updating Dotfiles
-
-After making changes:
-
-```bash
-git add .
-git commit -m "Update configs"
-git push
-```
-
----
-
-# Notes
-
-- Stow should always be run from inside the `~/dotfiles` directory.
-- Existing files in `~/.config` may need to be removed before stowing.
-- Hidden files can be checked with:
-
-```bash
-ls -la
-```
