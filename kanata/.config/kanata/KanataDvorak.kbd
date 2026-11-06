@@ -137,5 +137,5 @@
 
   lsft S-z S-x S-c S-v S-b S-n S-m S-, S-. S-/ @shiftoff
 
-  S-lctl S-lmet @shift-altbs @spcshift @shift-altgrENT S-rmet S-rctl
+  lctl lmet @shift-altbs @spcshift @shift-altgrENT rmet rctl
 )
